@@ -1,4 +1,4 @@
-/* Shared interactions for Putri Nusantara */
+/* Shared interactions for SETARA */
 (() => {
   // EmailJS setup untuk form permintaan (Ajukan Permintaan)
   const EMAILJS_PUBLIC_KEY = "AerY-Vlbtxcs8wHcG";
@@ -191,7 +191,7 @@
   // ---------------------------------------------------------------------
   // Modal form permintaan (dipicu dari tombol navbar). Tidak ada backend,
   // jadi submit akan membuka aplikasi email pengunjung dengan isi form
-  // yang sudah terisi otomatis, ditujukan ke email Putri Nusantara.
+  // yang sudah terisi otomatis, ditujukan ke email SETARA.
   // ---------------------------------------------------------------------
   const requestModal = document.getElementById("requestModal");
   const requestForm = document.getElementById("requestForm");
@@ -281,7 +281,7 @@
   // Prevent a stuck loader if an external font or map never completes.
   window.setTimeout(() => loader?.classList.add("is-hidden"), 2400);
 })();
-/* Putri Nusantara — Multi-language switcher (ID default, EN toggle) */
+/* SETARA — Multi-language switcher (ID default, EN toggle) */
 (() => {
   const STORAGE_KEY = "putri-nusantara-lang";
 
@@ -293,7 +293,7 @@
     "nav.request": "Make a Request",
 
     "index.hero.eyebrow": "From Nusantara to the world",
-    "index.hero.title": "Welcome to <em>SETARA</em>",
+    "index.hero.title": "WE ARE ALL <em>SETARA</em>",
     "index.hero.kicker": "Premium Indonesian Coffee Export Company",
     "index.hero.copy": "Bringing the finest character of Indonesian coffee from selected farms to global partners, with measured quality and lasting relationships.",
     "index.hero.explore": "Explore Products <span aria-hidden=\"true\">↗</span>",
@@ -324,7 +324,7 @@
 
     "about.breadcrumb": "About Us",
     "about.hero.eyebrow": "Our story",
-    "about.hero.title": "About <em>SETARA</em>",
+    "about.hero.title": "PT SENYUM <em>TANI NUSANTARA</em>",
     "about.hero.lead": "A trusted bridge between Indonesia's remarkable coffee origins and the world's most discerning buyers.",
     "about.story.eyebrow": "Who we are",
     "about.story.title": "A better export journey starts at <em>the origin.</em>",
@@ -389,7 +389,14 @@
     "index.stats.farmers.number": "50+ Farmers",
     "index.stats.farmers.label": "Years of Experience",
     "index.stats.global.number": "Global",
-    "index.stats.global.label": "Market Reach"
+    "index.stats.global.label": "Market Reach",
+
+    "index.map.title": "<em>SETARA</em> exports reach global trade markets",
+
+    "index.partner.eyebrow": "Partnership",
+    "index.partner.title": "Our <em>Partner</em>",
+    "index.partner.lead": "We work with trusted institutions to ensure the best quality and service.",
+    "index.partner.cta": "Contact Us"
   };
 
   const originals = new WeakMap();

@@ -1,4 +1,4 @@
-/* Putri Nusantara — shared design system */
+/* SETARA — shared design system */
 :root {
   --green-950: #0a2d16;
   --green-900: #103f20;
@@ -217,7 +217,7 @@ h2 {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: 104px;
+  min-height: 96px;
   gap: 28px;
 }
 
@@ -249,12 +249,12 @@ h2 {
 }
 
 .brand-logo {
-  margin-left: -28px;
+  margin-left: -10px;
 }
 
 .brand-logo img {
-  width: 360px;
-  max-height: 100px;
+  width: 320px;
+  max-height: 88px;
   object-fit: contain;
   object-position: left center;
 }
@@ -271,7 +271,6 @@ h2 {
   font-size: 0.82rem;
   font-weight: 600;
   line-height: 76px;
-   white-space: nowrap;
   transition: color 0.25s ease;
 }
 
@@ -434,17 +433,13 @@ h2 {
   max-width: 770px;
   margin-top: 18px;
   color: var(--white);
-  font-size: clamp(3.1rem, 7.1vw, 6.9rem);
+  font-size: clamp(2.7rem, 6.1vw, 5.6rem);
   line-height: .99;
 }
 
 .hero h1 em {
   display: block;
   color: var(--gold-light);
-}
-
-.hero h1 em.inline {
-  display: inline; 
 }
 
 .hero-kicker {
@@ -1780,8 +1775,9 @@ a.contact-card:hover .contact-arrow {
 }
 
 .footer-brand img {
-  width: 310px;
-  max-height: 96px;
+  width: auto;
+  height: 130px;
+  max-height: 130px;
 }
 
 .footer-brand span {
@@ -1912,48 +1908,34 @@ a.contact-card:hover .contact-arrow {
   transform: none;
 }
 
-@media (max-width: 960px) and (min-width: 721px) {
-  .menu-toggle {
-    display: block;
+@media (max-width: 920px) {
+  :root {
+    --container: min(100% - 40px, 1140px);
   }
 
-  .primary-nav {
-    position: fixed;
-    top: 96px;
-    right: 0;
-    left: 0;
-    display: grid;
-    gap: 0;
-    padding: 11px 24px 21px;
-    border-bottom: 1px solid var(--border);
-    background: var(--white);
-    box-shadow: 0 16px 25px rgba(20, 46, 27, .09);
-    clip-path: inset(0 0 100% 0);
-    pointer-events: none;
-    transition: clip-path .35s ease;
+  .brand-logo img {
+    width: 270px;
   }
 
-  .primary-nav.is-open {
-    clip-path: inset(0);
-    pointer-events: auto;
+  .intro-grid, .story-grid {
+    gap: 54px;
   }
 
-  .primary-nav a {
-    padding: 11px 8px;
-    line-height: 1.5;
+  .values-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 
-  .primary-nav a::after {
-    bottom: 7px;
-    left: 8px;
-    right: auto;
-    width: 28px;
+  .value-card {
+    min-height: 248px;
   }
 
-  .primary-nav .nav-request-btn {
-    justify-content: center;
-    width: 100%;
-    margin-top: 8px;
+  .footer-main {
+    grid-template-columns: 1fr auto;
+  }
+
+  .footer-main>p {
+    grid-row: 2;
+    grid-column: 1 / -1;
   }
 }
 
@@ -1969,6 +1951,10 @@ a.contact-card:hover .contact-arrow {
 
   .nav-wrap {
     min-height: 68px;
+  }
+
+  .brand-logo {
+    margin-left: 0;
   }
 
   .brand-logo img {
@@ -2029,7 +2015,7 @@ a.contact-card:hover .contact-arrow {
   }
 
   .hero h1 {
-    font-size: clamp(2.85rem, 13.2vw, 4.2rem);
+    font-size: clamp(2.5rem, 11.5vw, 3.6rem);
   }
 
   .hero-kicker {
@@ -2474,6 +2460,77 @@ a.contact-card:hover .contact-arrow {
   }
 }
 /* =========================================================
+   PARTNER BAND — Our Partner (logo mitra institusi)
+   ========================================================= */
+
+.partner-band {
+  padding: clamp(56px, 7vw, 93px) 0;
+  background: var(--white);
+}
+
+.partner-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.partner-inner h2 {
+  margin-top: 8px;
+  color: var(--green-950);
+  font-size: clamp(1.9rem, 3.3vw, 2.7rem);
+}
+
+.partner-inner h2 em {
+  color: var(--gold);
+  font-style: italic;
+}
+
+.partner-lead {
+  margin-top: 14px;
+  color: var(--muted);
+  font-size: .92rem;
+  line-height: 1.7;
+}
+
+.partner-logos {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(28px, 4vw, 44px);
+  margin: clamp(36px, 5vw, 56px) 0;
+}
+
+.partner-logos-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(28px, 5vw, 56px);
+}
+
+.partner-logos img {
+  height: 48px;
+  width: auto;
+  max-width: 140px;
+  object-fit: contain;
+  filter: grayscale(15%);
+}
+
+@media (max-width: 600px) {
+  .partner-logos-row {
+    gap: 24px;
+  }
+
+  .partner-logos img {
+    height: 38px;
+    max-width: 110px;
+  }
+}
+
+/* =========================================================
    STATS BAND — statistik singkat (produksi, petani, jangkauan)
    ========================================================= */
 
@@ -2486,6 +2543,7 @@ a.contact-card:hover .contact-arrow {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 32px;
+  margin-top: clamp(40px, 5.5vw, 64px);
   text-align: center;
 }
 
@@ -2526,6 +2584,35 @@ a.contact-card:hover .contact-arrow {
 .map-band {
   padding: clamp(56px, 7vw, 93px) 0;
   background: var(--cream);
+}
+
+.map-band-heading {
+  margin-bottom: clamp(32px, 4.5vw, 52px);
+  text-align: center;
+}
+
+.map-band-heading h2 {
+  max-width: 780px;
+  margin: 0 auto;
+  color: var(--green-950);
+  font-size: clamp(1.6rem, 2.9vw, 2.4rem);
+  line-height: 1.2;
+}
+
+.map-band-heading h2 em {
+  color: var(--gold);
+  font-style: italic;
+}
+
+.button-outline-green {
+  border-color: var(--green-800);
+  background: transparent;
+  color: var(--green-800);
+}
+
+.button-outline-green:hover {
+  background: var(--green-800);
+  color: var(--white);
 }
 
 .map-band-inner {
