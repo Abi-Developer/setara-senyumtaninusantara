@@ -253,8 +253,8 @@ h2 {
 }
 
 .brand-logo img {
-  width: 260px;
-  max-height: 76px;
+  width: 340px;
+  max-height: 96px;
   object-fit: contain;
   object-position: left center;
 }
@@ -1914,8 +1914,8 @@ a.contact-card:hover .contact-arrow {
   }
 
   .brand-logo img {
-    width: 230px;
-    max-height: 68px;
+    width: 260px;
+    max-height: 74px;
   }
 
   .intro-grid, .story-grid {
@@ -1959,8 +1959,8 @@ a.contact-card:hover .contact-arrow {
   }
 
   .brand-logo img {
-    width: 200px;
-    max-height: 56px;
+    width: 220px;
+    max-height: 60px;
   }
 
   .menu-toggle {
