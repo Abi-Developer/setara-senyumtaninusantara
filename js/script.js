@@ -2,7 +2,7 @@
 (() => {
   // EmailJS setup untuk form permintaan (Ajukan Permintaan)
   const EMAILJS_PUBLIC_KEY = "AerY-Vlbtxcs8wHcG";
-  const EMAILJS_SERVICE_ID = "service_qo78kzg";
+  const EMAILJS_SERVICE_ID = "service_vuzekjo";
   const EMAILJS_TEMPLATE_ID = "template_bs68xu8";
   if (window.emailjs) {
     window.emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
@@ -310,7 +310,7 @@
     "index.intro.trust2": "<strong>Export mindset</strong><br />Every lot is prepared with attention to detail.",
     "index.intro.link": "Meet SETARA <span aria-hidden=\"true\">→</span>",
 
-    "footer.tagline": "Premium Indonesian coffee, thoughtfully sourced for the global market.",
+    "footer.tagline": "<strong>Because We Are Setara.</strong><br /><em>Growing together, bringing value from Indonesia to the world.</em>",
     "footer.copyright": "Copyright © 2026 SETARA — PT Senyum Tani Nusantara. All Rights Reserved.",
     "footer.backtotop": "Back to top <span aria-hidden=\"true\">↑</span>",
 
