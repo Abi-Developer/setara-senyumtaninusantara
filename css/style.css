@@ -1548,6 +1548,11 @@ a.contact-card:hover {
   line-height: 1.22;
 }
 
+.contact-card strong.phone-number {
+  font-variant-numeric: lining-nums tabular-nums;
+  letter-spacing: 0.01em;
+}
+
 .contact-card small {
   margin-top: 4px;
   color: var(--muted);
