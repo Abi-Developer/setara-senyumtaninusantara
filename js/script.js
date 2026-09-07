@@ -13,7 +13,9 @@
   const menuToggle = document.querySelector(".menu-toggle");
   const primaryNav = document.querySelector(".primary-nav");
   const scrollTopButton = document.querySelector(".scroll-top");
-  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const reducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  ).matches;
 
   const closeMenu = () => {
     if (!menuToggle || !primaryNav) return;
@@ -39,7 +41,9 @@
     });
 
     // Tombol "Ajukan Permintaan" dikecualikan supaya tidak menutup menu sebelum modal sempat kebuka.
-    primaryNav.querySelectorAll("a").forEach((link) => link.addEventListener("click", closeMenu));
+    primaryNav
+      .querySelectorAll("a")
+      .forEach((link) => link.addEventListener("click", closeMenu));
     window.addEventListener("resize", () => {
       if (window.innerWidth > 720) closeMenu();
     });
@@ -51,7 +55,10 @@
       const target = document.querySelector(anchor.getAttribute("href"));
       if (!target) return;
       event.preventDefault();
-      target.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth", block: "start" });
+      target.scrollIntoView({
+        behavior: reducedMotion ? "auto" : "smooth",
+        block: "start",
+      });
       closeMenu();
     });
   });
@@ -81,7 +88,7 @@
             observer.unobserve(entry.target);
           });
         },
-        { threshold: 0.12, rootMargin: "0px 0px -28px" }
+        { threshold: 0.12, rootMargin: "0px 0px -28px" },
       );
       revealItems.forEach((item) => revealObserver.observe(item));
     } else {
@@ -103,7 +110,9 @@
         ripple.style.top = `${event.clientY - rect.top}px`;
         button.querySelector(".ripple")?.remove();
         button.appendChild(ripple);
-        ripple.addEventListener("animationend", () => ripple.remove(), { once: true });
+        ripple.addEventListener("animationend", () => ripple.remove(), {
+          once: true,
+        });
       });
     });
   }
@@ -120,12 +129,16 @@
       heroImage.style.transform = `translate3d(0, ${offset}px, 0) scale(1.04)`;
       frameRequested = false;
     };
-    window.addEventListener("scroll", () => {
-      if (!frameRequested) {
-        window.requestAnimationFrame(updateParallax);
-        frameRequested = true;
-      }
-    }, { passive: true });
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (!frameRequested) {
+          window.requestAnimationFrame(updateParallax);
+          frameRequested = true;
+        }
+      },
+      { passive: true },
+    );
     updateParallax();
   }
 
@@ -146,27 +159,43 @@
 
     const goToSlide = (index) => {
       activeIndex = (index + slides.length) % slides.length;
-      slides.forEach((slide, i) => slide.classList.toggle("is-active", i === activeIndex));
+      slides.forEach((slide, i) =>
+        slide.classList.toggle("is-active", i === activeIndex),
+      );
       dots.forEach((dot, i) => {
         dot.classList.toggle("is-active", i === activeIndex);
         dot.setAttribute("aria-selected", String(i === activeIndex));
       });
-      if (captionText) captionText.textContent = slides[activeIndex].dataset.caption || "";
+      if (captionText)
+        captionText.textContent = slides[activeIndex].dataset.caption || "";
     };
 
     const nextSlide = () => goToSlide(activeIndex + 1);
     const prevSlide = () => goToSlide(activeIndex - 1);
 
-    const stopAutoplay = () => { if (autoplayTimer) window.clearInterval(autoplayTimer); };
+    const stopAutoplay = () => {
+      if (autoplayTimer) window.clearInterval(autoplayTimer);
+    };
     const startAutoplay = () => {
       if (reducedMotion || slides.length < 2) return;
       stopAutoplay();
       autoplayTimer = window.setInterval(nextSlide, autoplayDelay);
     };
 
-    nextButton?.addEventListener("click", () => { nextSlide(); startAutoplay(); });
-    prevButton?.addEventListener("click", () => { prevSlide(); startAutoplay(); });
-    dots.forEach((dot, i) => dot.addEventListener("click", () => { goToSlide(i); startAutoplay(); }));
+    nextButton?.addEventListener("click", () => {
+      nextSlide();
+      startAutoplay();
+    });
+    prevButton?.addEventListener("click", () => {
+      prevSlide();
+      startAutoplay();
+    });
+    dots.forEach((dot, i) =>
+      dot.addEventListener("click", () => {
+        goToSlide(i);
+        startAutoplay();
+      }),
+    );
 
     // Pause saat kursor/keyboard fokus di area slider, lanjut lagi setelah ditinggal.
     originSlider.addEventListener("mouseenter", stopAutoplay);
@@ -176,7 +205,9 @@
 
     // Swipe ringan untuk layar sentuh.
     let touchStartX = 0;
-    originSlider.addEventListener("pointerdown", (event) => { touchStartX = event.clientX; });
+    originSlider.addEventListener("pointerdown", (event) => {
+      touchStartX = event.clientX;
+    });
     originSlider.addEventListener("pointerup", (event) => {
       const delta = event.clientX - touchStartX;
       if (Math.abs(delta) < 40) return;
@@ -197,7 +228,9 @@
   const requestForm = document.getElementById("requestForm");
   const requestNote = document.getElementById("requestModalNote");
   const openRequestTriggers = document.querySelectorAll("[data-open-request]");
-  const closeRequestTriggers = document.querySelectorAll("[data-close-request]");
+  const closeRequestTriggers = document.querySelectorAll(
+    "[data-close-request]",
+  );
   let lastFocusedBeforeModal = null;
 
   const openRequestModal = () => {
@@ -227,10 +260,13 @@
       openRequestModal();
     });
   });
-  closeRequestTriggers.forEach((trigger) => trigger.addEventListener("click", closeRequestModal));
+  closeRequestTriggers.forEach((trigger) =>
+    trigger.addEventListener("click", closeRequestModal),
+  );
 
   document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape" && requestModal?.classList.contains("is-open")) closeRequestModal();
+    if (event.key === "Escape" && requestModal?.classList.contains("is-open"))
+      closeRequestModal();
   });
 
   if (requestForm) {
@@ -241,12 +277,16 @@
       const message = requestForm.message.value.trim();
 
       if (!name || !email || !message) {
-        if (requestNote) requestNote.textContent = "Mohon lengkapi semua kolom terlebih dahulu.";
+        if (requestNote)
+          requestNote.textContent =
+            "Mohon lengkapi semua kolom terlebih dahulu.";
         return;
       }
 
       if (!window.emailjs) {
-        if (requestNote) requestNote.textContent = "Gagal memuat layanan email. Coba lagi nanti.";
+        if (requestNote)
+          requestNote.textContent =
+            "Gagal memuat layanan email. Coba lagi nanti.";
         return;
       }
 
@@ -257,7 +297,9 @@
       window.emailjs
         .send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, { name, email, message })
         .then(() => {
-          if (requestNote) requestNote.textContent = "Permintaan berhasil dikirim. Terima kasih!";
+          if (requestNote)
+            requestNote.textContent =
+              "Permintaan berhasil dikirim. Terima kasih!";
           requestForm.reset();
           window.setTimeout(() => {
             closeRequestModal();
@@ -265,7 +307,9 @@
           }, 1800);
         })
         .catch(() => {
-          if (requestNote) requestNote.textContent = "Gagal mengirim. Coba lagi sebentar lagi.";
+          if (requestNote)
+            requestNote.textContent =
+              "Gagal mengirim. Coba lagi sebentar lagi.";
         })
         .finally(() => {
           if (submitButton) submitButton.disabled = false;
@@ -273,9 +317,67 @@
     });
   }
 
+  // ---------------------------------------------------------------------
+  // Animasi hitung naik untuk angka statistik (1000+ Ton, 30+ Petani, dst)
+  // ---------------------------------------------------------------------
+  const animateCount = (el) => {
+    const target = parseInt(el.dataset.target, 10);
+    if (!target || el.dataset.animated) return;
+    el.dataset.animated = "true";
+
+    if (reducedMotion) {
+      el.textContent = target.toLocaleString("id-ID");
+      return;
+    }
+
+    const duration = 1600;
+    const start = performance.now();
+
+    const tick = (now) => {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.floor(eased * target).toLocaleString("id-ID");
+      if (progress < 1) {
+        window.requestAnimationFrame(tick);
+      } else {
+        el.textContent = target.toLocaleString("id-ID");
+      }
+    };
+    window.requestAnimationFrame(tick);
+  };
+
+  const initCounters = () => {
+    const counters = document.querySelectorAll(
+      ".count-num:not([data-animated])",
+    );
+    if (!counters.length) return;
+
+    if ("IntersectionObserver" in window) {
+      const counterObserver = new IntersectionObserver(
+        (entries, observer) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            animateCount(entry.target);
+            observer.unobserve(entry.target);
+          });
+        },
+        { threshold: 0.4 },
+      );
+      counters.forEach((el) => counterObserver.observe(el));
+    } else {
+      counters.forEach(animateCount);
+    }
+  };
+
+  initCounters();
+  window.setaraInitCounters = initCounters;
+
   // Let the first paint settle before the loader fades away.
   window.addEventListener("load", () => {
-    window.setTimeout(() => loader?.classList.add("is-hidden"), reducedMotion ? 0 : 320);
+    window.setTimeout(
+      () => loader?.classList.add("is-hidden"),
+      reducedMotion ? 0 : 320,
+    );
   });
 
   // Prevent a stuck loader if an external font or map never completes.
@@ -295,69 +397,95 @@
     "index.hero.eyebrow": "From Nusantara to the world",
     "index.hero.title": "PT SENYUM TANI <em>NUSANTARA</em>",
     "index.hero.kicker": "Premium Indonesian Coffee Export Company",
-    "index.hero.copy": "Bringing the finest character of Indonesian coffee from selected farms to global partners, with measured quality and lasting relationships.",
-    "index.hero.explore": "Explore Products <span aria-hidden=\"true\">↗</span>",
-    "index.hero.contact": "Contact Us <span aria-hidden=\"true\">→</span>",
+    "index.hero.copy":
+      "Bringing the finest character of Indonesian coffee from selected farms to global partners, with measured quality and lasting relationships.",
+    "index.hero.explore": 'Explore Products <span aria-hidden="true">↗</span>',
+    "index.hero.contact": 'Contact Us <span aria-hidden="true">→</span>',
     "index.hero.scroll": "Scroll to discover",
 
     "index.badge.label": "Indonesian<br />origin",
 
     "index.intro.eyebrow": "About Us",
     "index.intro.title": "Rooted in origin.<br /><em>Ready for the world.</em>",
-    "index.intro.p1": "SETARA is an Indonesian coffee export company committed to bringing high-quality green beans from local farmers to international markets.",
-    "index.intro.p2": "We care for every stage of the coffee's journey — from origin selection, quality curation, to export readiness — grounded in quality, trust, and sustainability.",
-    "index.intro.trust1": "<strong>Curated origins</strong><br />Connected to selected farms and communities.",
-    "index.intro.trust2": "<strong>Export mindset</strong><br />Every lot is prepared with attention to detail.",
-    "index.intro.link": "Meet SETARA <span aria-hidden=\"true\">→</span>",
+    "index.intro.p1":
+      "SETARA is an Indonesian coffee export company committed to bringing high-quality green beans from local farmers to international markets.",
+    "index.intro.p2":
+      "We care for every stage of the coffee's journey — from origin selection, quality curation, to export readiness — grounded in quality, trust, and sustainability.",
+    "index.intro.trust1":
+      "<strong>Curated origins</strong><br />Connected to selected farms and communities.",
+    "index.intro.trust2":
+      "<strong>Export mindset</strong><br />Every lot is prepared with attention to detail.",
+    "index.intro.link": 'Meet SETARA <span aria-hidden="true">→</span>',
 
-    "footer.tagline": "<strong>Because We Are Setara.</strong><br /><em>Growing together, bringing value from Indonesia to the world.</em>",
-    "footer.copyright": "Copyright © 2026 SETARA — PT Senyum Tani Nusantara. All Rights Reserved.",
-    "footer.backtotop": "Back to top <span aria-hidden=\"true\">↑</span>",
+    "footer.tagline":
+      "<strong>Because We Are Setara.</strong><br /><em>Growing together, bringing value from Indonesia to the world.</em>",
+    "footer.copyright":
+      "Copyright © 2026 SETARA — PT Senyum Tani Nusantara. All Rights Reserved.",
+    "footer.backtotop": 'Back to top <span aria-hidden="true">↑</span>',
 
     "modal.eyebrow": "Make a Request",
     "modal.title": "Tell us what you need",
-    "modal.lead": "Fill out this short form — your request will open directly in your email app, addressed to our team.",
+    "modal.lead":
+      "Fill out this short form — your request will open directly in your email app, addressed to our team.",
     "modal.label.name": "Name",
     "modal.label.email": "Email",
     "modal.label.message": "Request",
-    "modal.submit": "Send Request <span aria-hidden=\"true\">→</span>",
+    "modal.submit": 'Send Request <span aria-hidden="true">→</span>',
 
     "about.breadcrumb": "About Us",
     "about.hero.eyebrow": "Our story",
     "about.hero.title": "PT SENYUM <em>TANI NUSANTARA</em>",
-    "about.hero.lead": "A trusted bridge between Indonesia's remarkable coffee origins and the world's most discerning buyers.",
+    "about.hero.lead":
+      "A trusted bridge between Indonesia's remarkable coffee origins and the world's most discerning buyers.",
     "about.story.eyebrow": "Who we are",
-    "about.story.title": "A better export journey starts at <em>the origin.</em>",
-    "about.story.p1": "We are here to introduce the richness of Indonesian coffee through carefully selected green beans. We build relationships that grow together with farmers, processing partners, and international buyers.",
-    "about.story.p2": "With attention to consistency, transparency, and export readiness, we care for every lot so its distinct origin character reaches its destination.",
-    "about.story.signature": "<strong>SETARA</strong><br />Indonesian Coffee Export Company",
-    "about.origin.card": "<strong>Indonesia</strong><br />A landscape of distinct coffee origins.",
+    "about.story.title":
+      "A better export journey starts at <em>the origin.</em>",
+    "about.story.p1":
+      "We are here to introduce the richness of Indonesian coffee through carefully selected green beans. We build relationships that grow together with farmers, processing partners, and international buyers.",
+    "about.story.p2":
+      "With attention to consistency, transparency, and export readiness, we care for every lot so its distinct origin character reaches its destination.",
+    "about.story.signature":
+      "<strong>SETARA</strong><br />Indonesian Coffee Export Company",
+    "about.origin.card":
+      "<strong>Indonesia</strong><br />A landscape of distinct coffee origins.",
     "about.values.eyebrow": "What guides us",
     "about.values.title": "Built around enduring <em>values.</em>",
-    "about.values.desc": "These four principles guide how we select, process, and introduce Indonesian coffee to the world market.",
+    "about.values.desc":
+      "These four principles guide how we select, process, and introduce Indonesian coffee to the world market.",
     "about.value1.title": "Trusted Sources",
-    "about.value1.desc": "Selected directly from the best local farmers with maintained quality standards.",
+    "about.value1.desc":
+      "Selected directly from the best local farmers with maintained quality standards.",
     "about.value2.title": "Hygienic Process",
-    "about.value2.desc": "Processed through a clean, safe production system that meets operational standards.",
+    "about.value2.desc":
+      "Processed through a clean, safe production system that meets operational standards.",
     "about.value3.title": "Quality Assurance",
-    "about.value3.desc": "Every product goes through inspection and curation to ensure the best quality.",
+    "about.value3.desc":
+      "Every product goes through inspection and curation to ensure the best quality.",
     "about.value4.title": "Sustainable Partnership",
-    "about.value4.desc": "Supporting farmers' welfare through fair, transparent, and sustainable business practices.",
+    "about.value4.desc":
+      "Supporting farmers' welfare through fair, transparent, and sustainable business practices.",
     "about.gallery.eyebrow": "Behind the beans",
     "about.gallery.title": "From nursery to <em>an ever-growing garden.</em>",
-    "about.gallery.desc": "A glimpse of the field process — how every seedling is cared for before becoming export-ready coffee.",
-    "about.quote": "We believe the strongest coffee partnerships are made with clarity, care, and a shared respect for origin.",
+    "about.gallery.desc":
+      "A glimpse of the field process — how every seedling is cared for before becoming export-ready coffee.",
+    "about.quote":
+      "We believe the strongest coffee partnerships are made with clarity, care, and a shared respect for origin.",
 
     "product.breadcrumb": "Products",
     "product.hero.eyebrow": "Curated green coffee",
     "product.hero.title": "Our <em>Products</em>",
-    "product.hero.lead": "Distinct Indonesian green beans selected with an export-ready attention to quality, profile, and consistency.",
+    "product.hero.lead":
+      "Distinct Indonesian green beans selected with an export-ready attention to quality, profile, and consistency.",
     "product.intro.eyebrow": "Selection",
-    "product.intro.title": "A green bean portfolio with a <em>clear point of view.</em>",
-    "product.intro.desc": "Every lot is an invitation to explore the distinct character of Indonesian coffee. Contact our team for origin, availability, and the latest lot specifications.",
+    "product.intro.title":
+      "A green bean portfolio with a <em>clear point of view.</em>",
+    "product.intro.desc":
+      "Every lot is an invitation to explore the distinct character of Indonesian coffee. Contact our team for origin, availability, and the latest lot specifications.",
     "product.type": "Green Coffee",
-    "product.card1.desc": "A bold character with full body, chosen to provide a consistent foundation for espresso and bold-leaning blends alike.",
-    "product.card2.desc": "Selected Arabica Green Bean from Lereng Bismo, Java, grown at 1,600 masl. Features a premium character with a full wash process and a cupping score of 80+.",
+    "product.card1.desc":
+      "A bold character with full body, chosen to provide a consistent foundation for espresso and bold-leaning blends alike.",
+    "product.card2.desc":
+      "Selected Arabica Green Bean from Lereng Bismo, Java, grown at 1,600 masl. Features a premium character with a full wash process and a cupping score of 80+.",
     "product.spec.origin": "Origin",
     "product.spec.process": "Process",
     "product.spec.profile": "Profile",
@@ -365,15 +493,16 @@
     "product.card1.profile": "Bold · Full body",
     "product.card2.profile": "Complex · Refined",
     "product.availability": "By inquiry",
-    "product.link": "Request details <span aria-hidden=\"true\">→</span>",
+    "product.link": 'Request details <span aria-hidden="true">→</span>',
     "product.note.eyebrow": "Made for your program",
     "product.note.title": "Looking for a tailored coffee profile?",
-    "product.note.cta": "Talk to our team <span aria-hidden=\"true\">→</span>",
+    "product.note.cta": 'Talk to our team <span aria-hidden="true">→</span>',
 
     "contact.breadcrumb": "Contact",
     "contact.hero.eyebrow": "Let's connect",
     "contact.hero.title": "Contact <em>Us</em>",
-    "contact.hero.lead": "Let's start a conversation about your coffee needs. We're ready to help you find the right lot for your market.",
+    "contact.hero.lead":
+      "Let's start a conversation about your coffee needs. We're ready to help you find the right lot for your market.",
     "contact.card.phone.label": "Phone Number",
     "contact.card.phone.note": "Available by appointment",
     "contact.card.address.label": "Address",
@@ -381,22 +510,27 @@
     "contact.map.eyebrow": "Find us",
     "contact.map.title": "From Indonesia, <em>to the world.</em>",
     "contact.closing.eyebrow": "Partnerships start here",
-    "contact.closing.desc": "For lot availability, specifications, or partnership discussions, please email our team.",
-    "contact.closing.link": "Send an email <span aria-hidden=\"true\">→</span>",
+    "contact.closing.desc":
+      "For lot availability, specifications, or partnership discussions, please email our team.",
+    "contact.closing.link": 'Send an email <span aria-hidden="true">→</span>',
 
-    "index.stats.tons.number": "1000+ Tons",
+    "index.stats.tons.number":
+      '<span class="count-num" data-target="1000">0</span>+ Tons',
     "index.stats.tons.label": "Annual Production",
-    "index.stats.farmers.number": "20+ Farmers",
+    "index.stats.farmers.number":
+      '<span class="count-num" data-target="30">0</span>+ Farmers',
     "index.stats.farmers.label": "Years of Experience",
     "index.stats.global.number": "Global",
     "index.stats.global.label": "Market Reach",
 
-    "index.map.title": "PT Senyum Tani Nusantara Export reaches global trade markets",
+    "index.map.title":
+      "PT Senyum Tani Nusantara Export reaches global trade markets",
 
     "index.partner.eyebrow": "Partnership",
     "index.partner.title": "Our <em>Partner</em>",
-    "index.partner.lead": "We work with trusted institutions to ensure the best quality and service.",
-    "index.partner.cta": "Contact Us"
+    "index.partner.lead":
+      "We work with trusted institutions to ensure the best quality and service.",
+    "index.partner.cta": "Contact Us",
   };
 
   const originals = new WeakMap();
@@ -416,6 +550,8 @@
 
     const currentLabel = document.querySelector("[data-lang-current]");
     if (currentLabel) currentLabel.textContent = lang.toUpperCase();
+    
+    window.setaraInitCounters?.();
   };
 
   const setLanguage = (lang) => {
