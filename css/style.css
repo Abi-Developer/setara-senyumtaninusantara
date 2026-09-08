@@ -251,7 +251,7 @@ h2 {
 }
 
 .brand-logo {
-  margin-left: -10px;
+  margin-left: -30px;
 }
 
 .brand-logo img {
@@ -1796,7 +1796,7 @@ a.contact-card:hover .contact-arrow {
 }
 
 .footer-brand {
-  margin-left: 0;
+  margin-left: -16px;
 }
 
 .footer-brand img {
@@ -1815,7 +1815,7 @@ a.contact-card:hover .contact-arrow {
 
 .footer-main>p {
   max-width: 420px;
-  font-size: .95rem;
+  font-size: .85rem;
   line-height: 1.65;
 }
 
