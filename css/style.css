@@ -219,6 +219,8 @@ h2 {
   justify-content: space-between;
   min-height: 108px;
   gap: 28px;
+  max-width: 1040px;
+  margin-inline: auto;
 }
 
 .brand {
@@ -1786,7 +1788,7 @@ a.contact-card:hover .contact-arrow {
 
 .footer-main {
   display: grid;
-  grid-template-columns: 1.25fr 1.3fr auto;
+  grid-template-columns: auto 1fr auto;
   gap: 40px;
   align-items: center;
   min-height: 190px;
@@ -2170,7 +2172,7 @@ a.contact-card:hover .contact-arrow {
 
   .footer-main {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     align-items: center;
     min-height: 0;
     gap: 24px;
@@ -2183,18 +2185,19 @@ a.contact-card:hover .contact-arrow {
   }
 
   .footer-main>p {
-    flex-basis: 100%;
+    flex-basis: auto;
     font-size: .82rem;
   }
 
   .social-links {
     margin-left: auto;
+    flex-shrink: 0;
   }
 
   .footer-bottom {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 4px;
+    align-items: center;
+    flex-direction: row;
+    gap: 20px;
   }
 
   .slider-arrow {
@@ -2775,5 +2778,179 @@ a.contact-card:hover .contact-arrow {
   .lang-switcher {
     right: 14px;
     bottom: 68px;
+  }
+}
+/* =========================================================
+   FOOTER RESPONSIVE
+   Desktop tetap seperti desain asli.
+   Mobile ditata ulang agar rapi tanpa mengubah ukuran font/logo.
+   Garis pemisah footer tetap dipertahankan.
+   ========================================================= */
+@media (max-width: 920px) {
+  .footer-main {
+    grid-template-columns: 1fr auto;
+    gap: 30px;
+  }
+
+  .footer-main > p {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+}
+
+@media (max-width: 720px) {
+  .footer-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    min-height: 0;
+    padding: 31px 0 25px;
+    text-align: center;
+  }
+
+  .footer-brand {
+    margin-left: 0;
+  }
+
+  .footer-main > p {
+    flex-basis: auto;
+    max-width: 420px;
+    margin: 0;
+    text-align: center;
+  }
+
+  .social-links {
+    margin-left: 0;
+    justify-content: center;
+  }
+
+  .footer-bottom {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 17px 0;
+    border-top: 1px solid rgba(255, 255, 255, .11);
+  }
+}
+
+@media (max-width: 450px) {
+  .footer-main {
+    gap: 16px;
+  }
+
+  .footer-bottom {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .footer-bottom a {
+    align-self: flex-end;
+  }
+}
+
+/* =========================================================
+   FINAL NAVBAR + FOOTER RESPONSIVE FIX — ALL PAGES
+   Layout only: font and logo sizing remain as defined above.
+   ========================================================= */
+
+@media (max-width: 920px) {
+  .nav-wrap {
+    max-width: none;
+  }
+
+  .primary-nav {
+    gap: clamp(16px, 2.4vw, 30px);
+  }
+}
+
+@media (max-width: 720px) {
+  .primary-nav {
+    top: 76px;
+  }
+
+  .footer-main {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 20px;
+    min-height: 0;
+    padding: 31px 0 25px;
+    text-align: left;
+  }
+
+  .footer-brand {
+    margin-left: 0;
+  }
+
+  .footer-main > p {
+    grid-column: auto;
+    grid-row: auto;
+    min-width: 0;
+    margin: 0;
+    text-align: left;
+  }
+
+  .social-links {
+    margin-left: 0;
+    justify-content: flex-end;
+  }
+
+  .footer-bottom {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 17px 0;
+    border-top: 1px solid rgba(255, 255, 255, .11);
+  }
+}
+
+@media (max-width: 560px) {
+  .footer-main {
+    grid-template-columns: auto 1fr;
+    gap: 18px;
+  }
+
+  .footer-main > p {
+    grid-column: 2;
+  }
+
+  .social-links {
+    grid-column: 1 / -1;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 450px) {
+  .footer-main {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: 16px;
+    text-align: center;
+  }
+
+  .footer-main > p {
+    grid-column: auto;
+    text-align: center;
+  }
+
+  .social-links {
+    grid-column: auto;
+    justify-content: center;
+  }
+
+  .footer-bottom {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .footer-bottom a {
+    align-self: flex-end;
   }
 }
