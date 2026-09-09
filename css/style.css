@@ -263,7 +263,10 @@ h2 {
 
 .primary-nav {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
+  justify-content: flex-end;
+  row-gap: 8px;
   gap: clamp(20px, 3vw, 39px);
 }
 
@@ -273,6 +276,7 @@ h2 {
   font-size: 0.82rem;
   font-weight: 600;
   line-height: 76px;
+  white-space: nowrap;
   transition: color 0.25s ease;
 }
 
