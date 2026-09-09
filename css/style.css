@@ -629,6 +629,7 @@ h2 {
     align-items: center;
     gap: clamp(52px, 9vw, 128px);
   }
+  
 }
 
 .intro-image-wrap {
@@ -2018,7 +2019,7 @@ a.contact-card:hover .contact-arrow {
   transform: none;
 }
 
-@media (max-width: 1045) {
+@media (max-width: 920px) {
   :root {
     --container: min(100% - 40px, 1140px);
   }
@@ -2054,7 +2055,7 @@ a.contact-card:hover .contact-arrow {
   }
 }
 
-@media (max-width: 720px) {
+@media (max-width: 1045px) {
   :root {
     --container: calc(100% - 36px);
   }
