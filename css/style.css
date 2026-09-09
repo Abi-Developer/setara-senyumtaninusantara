@@ -2019,7 +2019,7 @@ a.contact-card:hover .contact-arrow {
   transform: none;
 }
 
-@media (max-width: 920px) {
+@media (max-width: 1045px) {
   :root {
     --container: min(100% - 40px, 1140px);
   }
@@ -2056,15 +2056,6 @@ a.contact-card:hover .contact-arrow {
 }
 
 @media (max-width: 1045px) {
-  :root {
-    --container: calc(100% - 36px);
-  }
-
-  .site-header {
-    -webkit-backdrop-filter: none;
-    backdrop-filter: none;
-  }
-
   .nav-wrap {
     min-height: 76px;
   }
@@ -2121,6 +2112,19 @@ a.contact-card:hover .contact-arrow {
     width: 100%;
     margin-top: 8px;
   }
+}
+
+@media (max-width: 720px) {
+  :root {
+    --container: calc(100% - 36px);
+  }
+
+  .site-header {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+
+  
 
   .hero {
     min-height: max(605px, calc(100svh - 68px));
