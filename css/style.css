@@ -623,7 +623,7 @@ h2 {
 }
 
 .intro-grid {
-  @media (min-width: 720px) {
+  @media (min-width: 1045px) {
     display: grid;
     grid-template-columns: minmax(0, 0.92fr) minmax(0, 1fr);
     align-items: center;
