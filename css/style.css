@@ -2018,7 +2018,7 @@ a.contact-card:hover .contact-arrow {
   transform: none;
 }
 
-@media (max-width: 920px) {
+@media (max-width: 1045) {
   :root {
     --container: min(100% - 40px, 1140px);
   }
@@ -2054,7 +2054,7 @@ a.contact-card:hover .contact-arrow {
   }
 }
 
-@media (max-width: 1045px) {
+@media (max-width: 720px) {
   :root {
     --container: calc(100% - 36px);
   }
