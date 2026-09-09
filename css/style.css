@@ -300,6 +300,7 @@ h2 {
 
 .menu-toggle {
   display: none;
+  flex-shrink: 0;
   width: 44px;
   height: 44px;
   padding: 10px;
@@ -2003,7 +2004,7 @@ a.contact-card:hover .contact-arrow {
 
   .primary-nav {
     position: fixed;
-    top: 68px;
+    top: 76px;
     right: 0;
     left: 0;
     display: grid;
@@ -2180,20 +2181,22 @@ a.contact-card:hover .contact-arrow {
 
   .footer-main {
     display: flex;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     align-items: center;
     min-height: 0;
-    gap: 24px;
+    gap: 20px 24px;
     padding: 31px 0 25px;
   }
 
-    .footer-brand img {
+  .site-footer .footer-brand img {
+    width: auto;
     height: 130px;
     max-height: 130px;
+    object-fit: contain;
   }
 
   .footer-main>p {
-    flex-basis: auto;
+    flex: 1 1 240px;
     font-size: .82rem;
   }
 
@@ -2789,83 +2792,8 @@ a.contact-card:hover .contact-arrow {
   }
 }
 /* =========================================================
-   FOOTER RESPONSIVE
-   Desktop tetap seperti desain asli.
-   Mobile ditata ulang agar rapi tanpa mengubah ukuran font/logo.
-   Garis pemisah footer tetap dipertahankan.
+   NAVBAR — penyesuaian tablet (921px–721px)
    ========================================================= */
-@media (max-width: 920px) {
-  .footer-main {
-    grid-template-columns: 1fr auto;
-    gap: 30px;
-  }
-
-  .footer-main > p {
-    grid-column: 1 / -1;
-    grid-row: 2;
-  }
-}
-
-@media (max-width: 720px) {
-  .footer-main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 18px;
-    min-height: 0;
-    padding: 31px 0 25px;
-    text-align: center;
-  }
-
-  .footer-brand {
-    margin-left: 0;
-  }
-
-  .footer-main > p {
-    flex-basis: auto;
-    max-width: 420px;
-    margin: 0;
-    text-align: center;
-  }
-
-  .social-links {
-    margin-left: 0;
-    justify-content: center;
-  }
-
-  .footer-bottom {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-    padding: 17px 0;
-    border-top: 1px solid rgba(255, 255, 255, .11);
-  }
-}
-
-@media (max-width: 450px) {
-  .footer-main {
-    gap: 16px;
-  }
-
-  .footer-bottom {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 4px;
-  }
-
-  .footer-bottom a {
-    align-self: flex-end;
-  }
-}
-
-/* =========================================================
-   FINAL NAVBAR + FOOTER RESPONSIVE FIX — ALL PAGES
-   Layout only: font and logo sizing remain as defined above.
-   ========================================================= */
-
 @media (max-width: 920px) {
   .nav-wrap {
     max-width: none;
@@ -2876,64 +2804,37 @@ a.contact-card:hover .contact-arrow {
   }
 }
 
-@media (max-width: 720px) {
-  .primary-nav {
-    top: 76px;
-  }
-
+/* =========================================================
+   FOOTER — HP kecil (di bawah 560px)
+   Baris footer (logo, teks, ikon sosial) dibuat menumpuk rapi
+   sebagai lanjutan dari .footer-main (flex-wrap) yang sudah
+   didefinisikan di blok 720px di atas. Tidak mengubah ukuran
+   font atau logo, hanya arah/susunannya di layar sempit.
+   ========================================================= */
+@media (max-width: 560px) {
   .footer-main {
-    display: grid;
-    grid-template-columns: auto minmax(0, 1fr) auto;
+    flex-direction: column;
     align-items: center;
-    gap: 20px;
-    min-height: 0;
-    padding: 31px 0 25px;
-    text-align: left;
-  }
-
-  .footer-brand {
-    margin-left: 0;
+    text-align: center;
   }
 
   .footer-main > p {
-    grid-column: auto;
-    grid-row: auto;
-    min-width: 0;
-    margin: 0;
-    text-align: left;
+    flex-basis: auto;
+    text-align: center;
   }
 
   .social-links {
     margin-left: 0;
-    justify-content: flex-end;
+    justify-content: center;
   }
 
   .footer-bottom {
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-    padding: 17px 0;
-    border-top: 1px solid rgba(255, 255, 255, .11);
+    gap: 6px;
+    text-align: center;
   }
 }
-
-@media (max-width: 560px) {
-  .footer-main {
-    grid-template-columns: auto 1fr;
-    gap: 18px;
-  }
-
-  .footer-main > p {
-    grid-column: 2;
-  }
-
-  .social-links {
-    grid-column: 1 / -1;
-    justify-content: flex-start;
-  }
-}
-
 
   .values-cta {
   display: flex;
@@ -2948,34 +2849,4 @@ a.contact-card:hover .contact-arrow {
 
 .button-profile-pdf:hover {
   background: #0f4a22;
-}
-
-@media (max-width: 450px) {
-  .footer-main {
-    grid-template-columns: 1fr;
-    justify-items: start;
-    gap: 16px;
-    text-align: left;
-  }
-
-  .footer-main > p {
-    grid-column: auto;
-    text-align: left;
-  }
-
-  .social-links {
-    grid-column: auto;
-    justify-content: flex-start;
-  }
-
-  .footer-bottom {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 4px;
-  }
-
-  .footer-bottom a {
-    align-self: flex-end;
-  }
-
 }
