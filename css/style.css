@@ -265,7 +265,7 @@ h2 {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: flex;
   row-gap: 8px;
   gap: clamp(20px, 3vw, 39px);
 }
@@ -596,10 +596,13 @@ h2 {
 }
 
 .intro-grid {
-  display: grid;
-  grid-template-columns: minmax(0, .92fr) minmax(0, 1fr);
-  align-items: center;
-  gap: clamp(52px, 9vw, 128px);
+  @media (min-width: 720px) {
+    display: grid;
+    grid-template-columns: minmax(0, .92fr) minmax(0, 1fr);
+    align-items: center;
+    gap: clamp(52px, 9vw, 128px);
+  }
+  
 }
 
 .intro-image-wrap {
@@ -2798,7 +2801,7 @@ a.contact-card:hover .contact-arrow {
 /* =========================================================
    NAVBAR — penyesuaian tablet (921px–721px)
    ========================================================= */
-@media (max-width: 920px) {
+@media (min-width: 721px) and (max-width: 920px) {
   .nav-wrap {
     max-width: none;
   }
@@ -2853,4 +2856,54 @@ a.contact-card:hover .contact-arrow {
 
 .button-profile-pdf:hover {
   background: #0f4a22;
+}
+
+/* =========================================================
+   MOBILE FIXES
+   ========================================================= */
+
+/* Nav & footer padding kepenuhan di HP sangat kecil (≤375px),
+   bikin overflow horizontal → halaman terasa "geser". */
+@media (max-width: 400px) {
+  .nav-wrap {
+    padding-inline: 16px;
+    gap: 12px;
+  }
+
+  .site-footer .container {
+    padding-inline: 16px;
+  }
+}
+
+/* Jaring pengaman: cegah scroll horizontal di manapun. */
+html {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+/* Defensif tambahan untuk grid (tidak salah walau bukan
+   penyebab utama — grid track 1fr defaultnya tidak mau
+   menyusut di bawah ukuran konten). */
+.spec-list,
+.product-grid,
+.story-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+@media (max-width: 720px) {
+  .product-grid,
+  .story-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@media (max-width: 450px) {
+  .spec-list {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* Email panjang di contact-card jangan bikin teks kepotong
+   tanpa terlihat jelas. */
+.contact-card strong {
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
