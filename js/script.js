@@ -2,7 +2,7 @@
 (() => {
   // EmailJS setup untuk form permintaan (Ajukan Permintaan)
   const EMAILJS_PUBLIC_KEY = "AerY-Vlbtxcs8wHcG";
-  const EMAILJS_SERVICE_ID = "service_vuzekjo";
+  const EMAILJS_SERVICE_ID = "service_qo78kzg";
   const EMAILJS_TEMPLATE_ID = "template_bs68xu8";
   if (window.emailjs) {
     window.emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });

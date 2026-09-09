@@ -219,8 +219,8 @@ h2 {
   justify-content: space-between;
   min-height: 108px;
   gap: 28px;
-  max-width: 1040px;
-  margin-inline: auto;
+  width: 100%;
+  padding-inline: 50px;
 }
 
 .brand {
@@ -251,7 +251,7 @@ h2 {
 }
 
 .brand-logo {
-  margin-left: -30px;
+  
 }
 
 .brand-logo img {
@@ -1786,6 +1786,13 @@ a.contact-card:hover .contact-arrow {
   color: rgba(255, 255, 255, .75);
 }
 
+.site-footer .container {
+  width: 100%;
+  max-width: none;
+  margin-inline: 0;
+  padding-inline: 50px;
+}
+
 .footer-main {
   display: grid;
   grid-template-columns: auto 1fr auto;
@@ -1793,10 +1800,6 @@ a.contact-card:hover .contact-arrow {
   align-items: center;
   min-height: 190px;
   padding: 31px 0;
-}
-
-.footer-brand {
-  margin-left: -16px;
 }
 
 .footer-brand img {
@@ -1815,8 +1818,10 @@ a.contact-card:hover .contact-arrow {
 
 .footer-main>p {
   max-width: 420px;
+  margin-inline: auto;
   font-size: .85rem;
   line-height: 1.65;
+  text-align: left;
 }
 
 .social-links {
@@ -1960,8 +1965,11 @@ a.contact-card:hover .contact-arrow {
   }
 
   .footer-main>p {
-    grid-row: 2;
-    grid-column: 1 / -1;
+    max-width: 420px;
+    margin-inline: auto;
+    font-size: .85rem;
+    line-height: 1.65;
+    text-align: center;
   }
 }
 
@@ -2922,26 +2930,42 @@ a.contact-card:hover .contact-arrow {
 
   .social-links {
     grid-column: 1 / -1;
-    justify-content: center;
+    justify-content: flex-start;
   }
+}
+
+
+  .values-cta {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.button-profile-pdf {
+  background: #0b3619;
+  color: var(--white);
+}
+
+.button-profile-pdf:hover {
+  background: #0f4a22;
 }
 
 @media (max-width: 450px) {
   .footer-main {
     grid-template-columns: 1fr;
-    justify-items: center;
+    justify-items: start;
     gap: 16px;
-    text-align: center;
+    text-align: left;
   }
 
   .footer-main > p {
     grid-column: auto;
-    text-align: center;
+    text-align: left;
   }
 
   .social-links {
     grid-column: auto;
-    justify-content: center;
+    justify-content: flex-start;
   }
 
   .footer-bottom {
@@ -2953,4 +2977,5 @@ a.contact-card:hover .contact-arrow {
   .footer-bottom a {
     align-self: flex-end;
   }
+
 }
