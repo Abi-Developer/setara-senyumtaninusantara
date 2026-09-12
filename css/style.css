@@ -3004,8 +3004,10 @@ html.forced-desktop-mode .footer-main {
 }
 
 html.forced-desktop-mode .site-footer .footer-brand img {
+  width: auto;
   height: 90px;
   max-height: 90px;
+  object-position: center;
 }
 
 html.forced-desktop-mode .footer-main > p {
