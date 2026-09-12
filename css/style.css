@@ -3077,8 +3077,9 @@ html.forced-desktop-mode .intro-grid {
 }
 
 /* Email panjang di contact-card jangan bikin teks kepotong
-   tanpa terlihat jelas. */
+   tanpa terlihat jelas. Prioritaskan patah di titik wajar (mis. setelah
+   tanda @ lewat <wbr>), baru kalau memang tidak muat, patah kata biasa. */
 .contact-card strong {
-  overflow-wrap: anywhere;
-  word-break: break-word;
+  overflow-wrap: break-word;
+  word-break: normal;
 }
