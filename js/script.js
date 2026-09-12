@@ -649,16 +649,17 @@
   const FOOTER_CLEARANCE = 20;
 
   const updateFloatingButtonOffsets = () => {
-    const footer = document.querySelector(".site-footer");
+    const footerBottomRow = document.querySelector(".footer-bottom");
     const scrollTopBtn = document.querySelector(".scroll-top");
     const langSwitcherEl = document.querySelector(".lang-switcher");
-    if (!footer) return;
+    if (!footerBottomRow) return;
 
-    const footerTop = footer.getBoundingClientRect().top;
-    const overlap = Math.max(
-      0,
-      window.innerHeight - footerTop + FOOTER_CLEARANCE,
-    );
+    // Acuannya baris "Kembali ke atas" (elemen terakhir di halaman),
+    // bukan seluruh tinggi footer — supaya tombol cuma naik secukupnya
+    // untuk menghindari baris itu, bukan melompat jauh ke atas begitu
+    // footer mulai terlihat.
+    const rowTop = footerBottomRow.getBoundingClientRect().top;
+    const overlap = Math.max(0, window.innerHeight - rowTop + FOOTER_CLEARANCE);
 
     if (scrollTopBtn)
       scrollTopBtn.style.bottom = `${SCROLL_TOP_BASE_BOTTOM + overlap}px`;
