@@ -2984,6 +2984,60 @@ html {
   max-width: 100%;
 }
 
+/* =========================================================
+   FOOTER — pemaksaan layout mobile saat "Mode Desktop" dibuka
+   lewat HP layar kecil. Class .forced-desktop-mode ditambahkan
+   oleh script.js (bukan lewat media query biasa, karena browser
+   dalam mode ini melaporkan viewport selebar desktop meski layar
+   fisiknya kecil). Aturan di sini menimpa layout grid 3-kolom
+   desktop supaya footer tetap rapi & menumpuk seperti versi HP.
+   ========================================================= */
+html.forced-desktop-mode .footer-main {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  text-align: center;
+  min-height: 0;
+  gap: 16px;
+  padding: 26px 16px;
+}
+
+html.forced-desktop-mode .site-footer .footer-brand img {
+  height: 90px;
+  max-height: 90px;
+}
+
+html.forced-desktop-mode .footer-main > p {
+  max-width: 320px;
+  margin-inline: auto;
+  text-align: center;
+  font-size: 0.78rem;
+}
+
+html.forced-desktop-mode .social-links {
+  margin-left: 0;
+  justify-content: center;
+}
+
+html.forced-desktop-mode .footer-bottom {
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-align: center;
+  font-size: 0.6rem;
+}
+
+html.forced-desktop-mode .site-footer .container {
+  padding-inline: 16px;
+}
+
+html.forced-desktop-mode .lang-switcher-toggle {
+  height: 36px;
+  padding: 0 11px;
+  font-size: 0.68rem;
+}
+
 /* Defensif tambahan untuk grid (tidak salah walau bukan
    penyebab utama — grid track 1fr defaultnya tidak mau
    menyusut di bawah ukuran konten). */

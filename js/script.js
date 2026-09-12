@@ -1,9 +1,31 @@
 /* Shared interactions for SETARA */
 (() => {
+  // Deteksi "Mode Desktop" yang dibuka lewat HP (mis. fitur "Request Desktop
+  // Site" di Chrome/Safari mobile). Dalam kondisi ini, CSS media query biasa
+  // (berdasarkan lebar viewport) tidak bisa diandalkan karena browser sengaja
+  // melaporkan viewport selebar desktop, padahal layar fisiknya tetap kecil.
+  // Kita bandingkan lebar layar fisik (window.screen.width, tidak terpengaruh
+  // mode desktop) dengan lebar viewport CSS saat ini. Kalau jauh lebih besar
+  // dari layar fisik, berarti mode desktop sedang aktif di perangkat kecil —
+  // tandai <html> supaya CSS bisa memaksa footer tetap pakai layout mobile.
+  const detectForcedDesktopMode = () => {
+    const physicalWidth = window.screen?.width || window.innerWidth;
+    const layoutWidth = document.documentElement.clientWidth;
+    const isSmallDevice = physicalWidth <= 480;
+    const isRenderingWide = layoutWidth >= 800;
+    document.documentElement.classList.toggle(
+      "forced-desktop-mode",
+      isSmallDevice && isRenderingWide,
+    );
+  };
+  detectForcedDesktopMode();
+  window.addEventListener("resize", detectForcedDesktopMode);
+  window.addEventListener("orientationchange", detectForcedDesktopMode);
+
   // EmailJS setup untuk form permintaan (Ajukan Permintaan)
-  const EMAILJS_PUBLIC_KEY = "AerY-Vlbtxcs8wHcG";
-  const EMAILJS_SERVICE_ID = "service_vuzekjo";
-  const EMAILJS_TEMPLATE_ID = "template_bs68xu8";
+  const EMAILJS_PUBLIC_KEY = "Xl8zPi10_gdsLxD0X";
+  const EMAILJS_SERVICE_ID = "service_wqptp43";
+  const EMAILJS_TEMPLATE_ID = "template_itqpzgd";
   if (window.emailjs) {
     window.emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
   }
@@ -253,10 +275,6 @@
 
   openRequestTriggers.forEach((trigger) => {
     trigger.addEventListener("click", () => {
-      if (!window.emailjs) {
-        window.location.href = "contact.html#top";
-        return;
-      }
       openRequestModal();
     });
   });
@@ -284,9 +302,7 @@
       }
 
       if (!window.emailjs) {
-        if (requestNote)
-          requestNote.textContent =
-            "Gagal memuat layanan email. Coba lagi nanti.";
+        openMailtoFallback({ name, email, message });
         return;
       }
 
@@ -307,14 +323,32 @@
           }, 1800);
         })
         .catch(() => {
+          // Fallback: kemungkinan kuota EmailJS habis atau layanan sedang
+          // bermasalah. Bukakan aplikasi email pengunjung sebagai cadangan
+          // supaya permintaan tetap sampai ke tim SETARA.
           if (requestNote)
             requestNote.textContent =
-              "Gagal mengirim. Coba lagi sebentar lagi.";
+              "Gagal mengirim otomatis. Membuka aplikasi email sebagai cadangan…";
+          window.setTimeout(() => {
+            openMailtoFallback({ name, email, message });
+          }, 900);
         })
         .finally(() => {
           if (submitButton) submitButton.disabled = false;
         });
     });
+  }
+
+  // Fallback pengiriman lewat aplikasi email pengunjung (mailto:), dipakai
+  // saat EmailJS gagal dimuat atau gagal mengirim (misal kuota bulanan habis).
+  const SETARA_FALLBACK_EMAIL = "senyumtaninusantara@gmail.com";
+  function openMailtoFallback({ name, email, message }) {
+    const subject = `Permintaan Baru dari ${name}`;
+    const body = `Nama: ${name}\nEmail: ${email}\n\nPesan:\n${message}`;
+    const mailtoUrl = `mailto:${SETARA_FALLBACK_EMAIL}?subject=${encodeURIComponent(
+      subject,
+    )}&body=${encodeURIComponent(body)}`;
+    window.location.href = mailtoUrl;
   }
 
   // ---------------------------------------------------------------------
@@ -399,8 +433,8 @@
     "index.hero.kicker": "Premium Indonesian Coffee Export Company",
     "index.hero.copy":
       "Bringing the finest character of Indonesian coffee from selected farms to global partners, with measured quality and lasting relationships.",
-    "index.hero.explore": 'Explore Products <span aria-hidden="true">↗</span>',
-    "index.hero.contact": 'Contact Us <span aria-hidden="true">→</span>',
+    "index.hero.explore": "Explore Products",
+    "index.hero.contact": "Contact Us",
     "index.hero.scroll": "Scroll to discover",
 
     "index.badge.label": "Indonesian<br />origin",
@@ -464,6 +498,7 @@
     "about.value4.title": "Sustainable Partnership",
     "about.value4.desc":
       "Supporting farmers' welfare through fair, transparent, and sustainable business practices.",
+    "about.values.pdf": "View Company Profile PDF",
     "about.gallery.eyebrow": "Behind the beans",
     "about.gallery.title": "From nursery to <em>an ever-growing garden.</em>",
     "about.gallery.desc":
@@ -493,10 +528,10 @@
     "product.card1.profile": "Bold · Full body",
     "product.card2.profile": "Complex · Refined",
     "product.availability": "By inquiry",
-    "product.link": 'Request details <span aria-hidden="true">→</span>',
+    "product.link": "Request details",
     "product.note.eyebrow": "Made for your program",
     "product.note.title": "Looking for a tailored coffee profile?",
-    "product.note.cta": 'Talk to our team <span aria-hidden="true">→</span>',
+    "product.note.cta": "Talk to our team",
 
     "contact.breadcrumb": "Contact",
     "contact.hero.eyebrow": "Let's connect",
@@ -512,7 +547,7 @@
     "contact.closing.eyebrow": "Partnerships start here",
     "contact.closing.desc":
       "For lot availability, specifications, or partnership discussions, please email our team.",
-    "contact.closing.link": 'Send an email <span aria-hidden="true">→</span>',
+    "contact.closing.link": "Send an email",
 
     "index.stats.tons.number":
       '<span class="count-num" data-target="1000">0</span>+ Tons',
@@ -597,11 +632,48 @@
         wrap.classList.remove("is-open");
         toggleBtn.setAttribute("aria-expanded", "false");
       }
+
     });
   };
+
+  // ---------------------------------------------------------------------
+  // Cegah tombol "kembali ke atas" & language switcher menumpuk footer.
+  // Kedua tombol itu position:fixed terhadap layar, jadi kalau viewport
+  // pendek (misal mode "desktop site" yang dibuka lewat HP, yang membuat
+  // halaman diperkecil/zoom-out), mereka bisa jatuh tepat di atas footer.
+  // Di sini kita geser ke atas otomatis sebesar area footer yang tumpang
+  // tindih dengan bagian bawah layar.
+  // ---------------------------------------------------------------------
+  const SCROLL_TOP_BASE_BOTTOM = 22;
+  const LANG_SWITCHER_BASE_BOTTOM = 78;
+  const FOOTER_CLEARANCE = 20;
+
+  const updateFloatingButtonOffsets = () => {
+    const footer = document.querySelector(".site-footer");
+    const scrollTopBtn = document.querySelector(".scroll-top");
+    const langSwitcherEl = document.querySelector(".lang-switcher");
+    if (!footer) return;
+
+    const footerTop = footer.getBoundingClientRect().top;
+    const overlap = Math.max(
+      0,
+      window.innerHeight - footerTop + FOOTER_CLEARANCE,
+    );
+
+    if (scrollTopBtn)
+      scrollTopBtn.style.bottom = `${SCROLL_TOP_BASE_BOTTOM + overlap}px`;
+    if (langSwitcherEl)
+      langSwitcherEl.style.bottom = `${LANG_SWITCHER_BASE_BOTTOM + overlap}px`;
+  };
+
+  window.addEventListener("scroll", updateFloatingButtonOffsets, {
+    passive: true,
+  });
+  window.addEventListener("resize", updateFloatingButtonOffsets);
 
   document.addEventListener("DOMContentLoaded", () => {
     buildSwitcher();
     applyLanguage(localStorage.getItem(STORAGE_KEY) || "id");
+    updateFloatingButtonOffsets();
   });
 })();
