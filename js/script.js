@@ -179,6 +179,17 @@
     let activeIndex = 0;
     let autoplayTimer = null;
 
+    const updateActiveCaption = () => {
+      if (!captionText) return;
+      const activeSlide = slides[activeIndex];
+      if (!activeSlide) return;
+      const lang = document.documentElement.lang === "en" ? "en" : "id";
+      const key = activeSlide.dataset.captionKey;
+      const enText = lang === "en" && key ? window.setaraEnDict?.[key] : null;
+      captionText.textContent = enText || activeSlide.dataset.caption || "";
+    };
+    window.setaraRefreshSliderCaption = updateActiveCaption;
+
     const goToSlide = (index) => {
       activeIndex = (index + slides.length) % slides.length;
       slides.forEach((slide, i) =>
@@ -188,8 +199,7 @@
         dot.classList.toggle("is-active", i === activeIndex);
         dot.setAttribute("aria-selected", String(i === activeIndex));
       });
-      if (captionText)
-        captionText.textContent = slides[activeIndex].dataset.caption || "";
+      updateActiveCaption();
     };
 
     const nextSlide = () => goToSlide(activeIndex + 1);
@@ -439,6 +449,10 @@
 
     "index.badge.label": "Indonesian<br />origin",
 
+    "index.slide1.caption": "From selected seedlings",
+    "index.slide2.caption": "A garden that keeps growing",
+    "index.slide3.caption": "Carefully nurtured",
+
     "index.intro.eyebrow": "About Us",
     "index.intro.title": "Rooted in origin.<br /><em>Ready for the world.</em>",
     "index.intro.p1":
@@ -449,7 +463,7 @@
       "<strong>Curated origins</strong><br />Connected to selected farms and communities.",
     "index.intro.trust2":
       "<strong>Export mindset</strong><br />Every lot is prepared with attention to detail.",
-    "index.intro.link": 'Meet SETARA <span aria-hidden="true">→</span>',
+    "index.intro.link": "Meet SETARA",
 
     "footer.tagline":
       "<strong>Because We Are Setara.</strong><br /><em>Growing together, bringing value from Indonesia to the world.</em>",
@@ -464,7 +478,7 @@
     "modal.label.name": "Name",
     "modal.label.email": "Email",
     "modal.label.message": "Request",
-    "modal.submit": 'Send Request <span aria-hidden="true">→</span>',
+    "modal.submit": "Send Request",
 
     "about.breadcrumb": "About Us",
     "about.hero.eyebrow": "Our story",
@@ -538,6 +552,7 @@
     "contact.hero.title": "Contact <em>Us</em>",
     "contact.hero.lead":
       "Let's start a conversation about your coffee needs. We're ready to help you find the right lot for your market.",
+    "contact.card.email.note": "Business & Export Partnership",
     "contact.card.phone.label": "Phone Number",
     "contact.card.phone.note": "Available by appointment",
     "contact.card.address.label": "Address",
@@ -569,6 +584,7 @@
   };
 
   const originals = new WeakMap();
+  window.setaraEnDict = en;
 
   const applyLanguage = (lang) => {
     document.querySelectorAll("[data-i18n]").forEach((el) => {
@@ -587,6 +603,7 @@
     if (currentLabel) currentLabel.textContent = lang.toUpperCase();
     
     window.setaraInitCounters?.();
+    window.setaraRefreshSliderCaption?.();
   };
 
   const setLanguage = (lang) => {

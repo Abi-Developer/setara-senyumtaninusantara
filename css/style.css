@@ -3040,6 +3040,22 @@ html.forced-desktop-mode .lang-switcher-toggle {
   font-size: 0.68rem;
 }
 
+/* =========================================================
+   INTRO (section "Tentang Kami" di beranda) — kebalikan dari
+   kasus footer di atas. .intro-grid baru jadi grid 2 kolom
+   mulai lebar 1045px ke atas, sedangkan "Mode Desktop" di HP
+   sering melaporkan viewport LEBIH SEMPIT dari 1045px meski
+   secara visual disebut "mode desktop". Akibatnya intro-grid
+   ikut menumpuk seperti tampilan HP biasa. Di sini kita paksa
+   tetap 2 kolom seperti versi desktop asli.
+   ========================================================= */
+html.forced-desktop-mode .intro-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(52px, 9vw, 128px);
+}
+
 /* Defensif tambahan untuk grid (tidak salah walau bukan
    penyebab utama — grid track 1fr defaultnya tidak mau
    menyusut di bawah ukuran konten). */
