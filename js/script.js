@@ -535,6 +535,12 @@
       "A bold character with full body, chosen to provide a consistent foundation for espresso and bold-leaning blends alike.",
     "product.card2.desc":
       "Selected Arabica Green Bean from Lereng Bismo, Java, grown at 1,600 masl. Features a premium character with a full wash process and a cupping score of 80+.",
+    "product.card3.desc":
+      "A natural process that highlights fruity, naturally sweet notes with a medium body, suited to a complex and fruity coffee profile.",
+    "product.card4.desc":
+      "A washed process with a clean character and bright citrus notes, delivering a well-structured, balanced flavor.",
+    "product.card5.desc":
+      "A honey process that brings out full sweetness with hints of tropical fruit and a distinctive jammy aroma.",
     "product.spec.origin": "Origin",
     "product.spec.process": "Process",
     "product.spec.profile": "Profile",
