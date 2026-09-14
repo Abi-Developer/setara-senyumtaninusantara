@@ -1,13 +1,5 @@
 /* Shared interactions for SETARA */
 (() => {
-  // Deteksi "Mode Desktop" yang dibuka lewat HP (mis. fitur "Request Desktop
-  // Site" di Chrome/Safari mobile). Dalam kondisi ini, CSS media query biasa
-  // (berdasarkan lebar viewport) tidak bisa diandalkan karena browser sengaja
-  // melaporkan viewport selebar desktop, padahal layar fisiknya tetap kecil.
-  // Kita bandingkan lebar layar fisik (window.screen.width, tidak terpengaruh
-  // mode desktop) dengan lebar viewport CSS saat ini. Kalau jauh lebih besar
-  // dari layar fisik, berarti mode desktop sedang aktif di perangkat kecil —
-  // tandai <html> supaya CSS bisa memaksa footer tetap pakai layout mobile.
   const detectForcedDesktopMode = () => {
     const physicalWidth = window.screen?.width || window.innerWidth;
     const layoutWidth = document.documentElement.clientWidth;
@@ -21,15 +13,12 @@
   detectForcedDesktopMode();
   window.addEventListener("resize", detectForcedDesktopMode);
   window.addEventListener("orientationchange", detectForcedDesktopMode);
-
-  // EmailJS setup untuk form permintaan (Ajukan Permintaan)
   const EMAILJS_PUBLIC_KEY = "Xl8zPi10_gdsLxD0X";
   const EMAILJS_SERVICE_ID = "service_wqptp43";
   const EMAILJS_TEMPLATE_ID = "template_itqpzgd";
   if (window.emailjs) {
     window.emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
   }
-
   const body = document.body;
   const loader = document.getElementById("site-loader");
   const menuToggle = document.querySelector(".menu-toggle");
@@ -38,7 +27,6 @@
   const reducedMotion = window.matchMedia(
     "(prefers-reduced-motion: reduce)",
   ).matches;
-
   const closeMenu = () => {
     if (!menuToggle || !primaryNav) return;
     menuToggle.classList.remove("is-open");
@@ -47,7 +35,6 @@
     menuToggle.setAttribute("aria-label", "Buka navigasi");
     body.classList.remove("menu-open");
   };
-
   const openMenu = () => {
     if (!menuToggle || !primaryNav) return;
     menuToggle.classList.add("is-open");
@@ -56,13 +43,10 @@
     menuToggle.setAttribute("aria-label", "Tutup navigasi");
     body.classList.add("menu-open");
   };
-
   if (menuToggle && primaryNav) {
     menuToggle.addEventListener("click", () => {
       primaryNav.classList.contains("is-open") ? closeMenu() : openMenu();
     });
-
-    // Tombol "Ajukan Permintaan" dikecualikan supaya tidak menutup menu sebelum modal sempat kebuka.
     primaryNav
       .querySelectorAll("a")
       .forEach((link) => link.addEventListener("click", closeMenu));
@@ -70,8 +54,6 @@
       if (window.innerWidth > 720) closeMenu();
     });
   }
-
-  // Smooth-scroll local links without hijacking normal page navigation.
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     anchor.addEventListener("click", (event) => {
       const target = document.querySelector(anchor.getAttribute("href"));
@@ -84,20 +66,16 @@
       closeMenu();
     });
   });
-
   if (scrollTopButton) {
     const toggleScrollTop = () => {
       scrollTopButton.classList.toggle("is-visible", window.scrollY > 500);
     };
-
     window.addEventListener("scroll", toggleScrollTop, { passive: true });
     toggleScrollTop();
     scrollTopButton.addEventListener("click", () => {
       window.scrollTo({ top: 0, behavior: reducedMotion ? "auto" : "smooth" });
     });
   }
-
-  // The reveal observer only alters elements after JavaScript is known to be running.
   const revealItems = document.querySelectorAll(".reveal");
   if (revealItems.length) {
     document.documentElement.classList.add("reveal-ready");
@@ -117,8 +95,6 @@
       revealItems.forEach((item) => item.classList.add("is-visible"));
     }
   }
-
-  // Compact ripple that respects pointer position and keeps links usable.
   if (!reducedMotion) {
     document.querySelectorAll(".button").forEach((button) => {
       button.addEventListener("pointerdown", (event) => {
@@ -138,8 +114,6 @@
       });
     });
   }
-
-  // A minimal parallax treatment on the home hero image.
   const heroImage = document.querySelector("[data-parallax]");
   if (heroImage && !reducedMotion) {
     let frameRequested = false;
@@ -163,11 +137,6 @@
     );
     updateParallax();
   }
-
-  // ---------------------------------------------------------------------
-  // Slider "perjalanan kopi" di beranda: bibit -> kebun -> proses perawatan.
-  // Crossfade otomatis, bisa dinavigasi lewat panah, dot, atau swipe.
-  // ---------------------------------------------------------------------
   const originSlider = document.getElementById("originSlider");
   if (originSlider) {
     const slides = [...originSlider.querySelectorAll(".slide")];
@@ -178,7 +147,6 @@
     const autoplayDelay = Number(originSlider.dataset.autoplay) || 5000;
     let activeIndex = 0;
     let autoplayTimer = null;
-
     const updateActiveCaption = () => {
       if (!captionText) return;
       const activeSlide = slides[activeIndex];
@@ -189,7 +157,6 @@
       captionText.textContent = enText || activeSlide.dataset.caption || "";
     };
     window.setaraRefreshSliderCaption = updateActiveCaption;
-
     const goToSlide = (index) => {
       activeIndex = (index + slides.length) % slides.length;
       slides.forEach((slide, i) =>
@@ -201,10 +168,8 @@
       });
       updateActiveCaption();
     };
-
     const nextSlide = () => goToSlide(activeIndex + 1);
     const prevSlide = () => goToSlide(activeIndex - 1);
-
     const stopAutoplay = () => {
       if (autoplayTimer) window.clearInterval(autoplayTimer);
     };
@@ -213,7 +178,6 @@
       stopAutoplay();
       autoplayTimer = window.setInterval(nextSlide, autoplayDelay);
     };
-
     nextButton?.addEventListener("click", () => {
       nextSlide();
       startAutoplay();
@@ -228,14 +192,10 @@
         startAutoplay();
       }),
     );
-
-    // Pause saat kursor/keyboard fokus di area slider, lanjut lagi setelah ditinggal.
     originSlider.addEventListener("mouseenter", stopAutoplay);
     originSlider.addEventListener("mouseleave", startAutoplay);
     originSlider.addEventListener("focusin", stopAutoplay);
     originSlider.addEventListener("focusout", startAutoplay);
-
-    // Swipe ringan untuk layar sentuh.
     let touchStartX = 0;
     originSlider.addEventListener("pointerdown", (event) => {
       touchStartX = event.clientX;
@@ -246,16 +206,9 @@
       delta > 0 ? prevSlide() : nextSlide();
       startAutoplay();
     });
-
     goToSlide(0);
     startAutoplay();
   }
-
-  // ---------------------------------------------------------------------
-  // Modal form permintaan (dipicu dari tombol navbar). Tidak ada backend,
-  // jadi submit akan membuka aplikasi email pengunjung dengan isi form
-  // yang sudah terisi otomatis, ditujukan ke email SETARA.
-  // ---------------------------------------------------------------------
   const requestModal = document.getElementById("requestModal");
   const requestForm = document.getElementById("requestForm");
   const requestNote = document.getElementById("requestModalNote");
@@ -264,7 +217,6 @@
     "[data-close-request]",
   );
   let lastFocusedBeforeModal = null;
-
   const openRequestModal = () => {
     if (!requestModal) return;
     closeMenu();
@@ -274,7 +226,6 @@
     body.classList.add("menu-open");
     window.setTimeout(() => document.getElementById("reqName")?.focus(), 200);
   };
-
   const closeRequestModal = () => {
     if (!requestModal) return;
     requestModal.classList.remove("is-open");
@@ -282,7 +233,6 @@
     body.classList.remove("menu-open");
     lastFocusedBeforeModal?.focus();
   };
-
   openRequestTriggers.forEach((trigger) => {
     trigger.addEventListener("click", () => {
       openRequestModal();
@@ -291,35 +241,29 @@
   closeRequestTriggers.forEach((trigger) =>
     trigger.addEventListener("click", closeRequestModal),
   );
-
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape" && requestModal?.classList.contains("is-open"))
       closeRequestModal();
   });
-
   if (requestForm) {
     requestForm.addEventListener("submit", (event) => {
       event.preventDefault();
       const name = requestForm.name.value.trim();
       const email = requestForm.email.value.trim();
       const message = requestForm.message.value.trim();
-
       if (!name || !email || !message) {
         if (requestNote)
           requestNote.textContent =
             "Mohon lengkapi semua kolom terlebih dahulu.";
         return;
       }
-
       if (!window.emailjs) {
         openMailtoFallback({ name, email, message });
         return;
       }
-
       const submitButton = requestForm.querySelector(".request-submit");
       if (submitButton) submitButton.disabled = true;
       if (requestNote) requestNote.textContent = "Mengirim permintaan…";
-
       window.emailjs
         .send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, { name, email, message })
         .then(() => {
@@ -333,9 +277,6 @@
           }, 1800);
         })
         .catch(() => {
-          // Fallback: kemungkinan kuota EmailJS habis atau layanan sedang
-          // bermasalah. Bukakan aplikasi email pengunjung sebagai cadangan
-          // supaya permintaan tetap sampai ke tim SETARA.
           if (requestNote)
             requestNote.textContent =
               "Gagal mengirim otomatis. Membuka aplikasi email sebagai cadangan…";
@@ -348,9 +289,6 @@
         });
     });
   }
-
-  // Fallback pengiriman lewat aplikasi email pengunjung (mailto:), dipakai
-  // saat EmailJS gagal dimuat atau gagal mengirim (misal kuota bulanan habis).
   const SETARA_FALLBACK_EMAIL = "senyumtaninusantara@gmail.com";
   function openMailtoFallback({ name, email, message }) {
     const subject = `Permintaan Baru dari ${name}`;
@@ -360,23 +298,16 @@
     )}&body=${encodeURIComponent(body)}`;
     window.location.href = mailtoUrl;
   }
-
-  // ---------------------------------------------------------------------
-  // Animasi hitung naik untuk angka statistik (1000+ Ton, 30+ Petani, dst)
-  // ---------------------------------------------------------------------
   const animateCount = (el) => {
     const target = parseInt(el.dataset.target, 10);
     if (!target || el.dataset.animated) return;
     el.dataset.animated = "true";
-
     if (reducedMotion) {
       el.textContent = target.toLocaleString("id-ID");
       return;
     }
-
     const duration = 1600;
     const start = performance.now();
-
     const tick = (now) => {
       const progress = Math.min((now - start) / duration, 1);
       const eased = 1 - Math.pow(1 - progress, 3);
@@ -389,13 +320,11 @@
     };
     window.requestAnimationFrame(tick);
   };
-
   const initCounters = () => {
     const counters = document.querySelectorAll(
       ".count-num:not([data-animated])",
     );
     if (!counters.length) return;
-
     if ("IntersectionObserver" in window) {
       const counterObserver = new IntersectionObserver(
         (entries, observer) => {
@@ -412,32 +341,25 @@
       counters.forEach(animateCount);
     }
   };
-
   initCounters();
   window.setaraInitCounters = initCounters;
-
-  // Let the first paint settle before the loader fades away.
   window.addEventListener("load", () => {
     window.setTimeout(
       () => loader?.classList.add("is-hidden"),
       reducedMotion ? 0 : 320,
     );
   });
-
-  // Prevent a stuck loader if an external font or map never completes.
   window.setTimeout(() => loader?.classList.add("is-hidden"), 2400);
 })();
 /* SETARA — Multi-language switcher (ID default, EN toggle) */
 (() => {
   const STORAGE_KEY = "putri-nusantara-lang";
-
   const en = {
     "nav.beranda": "Home",
     "nav.about": "About Us",
     "nav.product": "Products",
     "nav.contact": "Contact",
     "nav.request": "Make a Request",
-
     "index.hero.eyebrow": "From Nusantara to the world",
     "index.hero.title": "PT SENYUM TANI <em>NUSANTARA</em>",
     "index.hero.kicker": "Premium Indonesian Coffee Export Company",
@@ -446,13 +368,10 @@
     "index.hero.explore": "Explore Products",
     "index.hero.contact": "Contact Us",
     "index.hero.scroll": "Scroll to discover",
-
     "index.badge.label": "Indonesian<br />origin",
-
     "index.slide1.caption": "From selected seedlings",
     "index.slide2.caption": "A garden that keeps growing",
     "index.slide3.caption": "Carefully nurtured",
-
     "index.intro.eyebrow": "About Us",
     "index.intro.title": "Rooted in origin.<br /><em>Ready for the world.</em>",
     "index.intro.p1":
@@ -464,13 +383,11 @@
     "index.intro.trust2":
       "<strong>Export mindset</strong><br />Every lot is prepared with attention to detail.",
     "index.intro.link": "Meet SETARA",
-
     "footer.tagline":
       "<strong>Because We Are Setara.</strong><br /><em>Growing together, bringing value from Indonesia to the world.</em>",
     "footer.copyright":
       "Copyright © 2026 SETARA — PT Senyum Tani Nusantara. All Rights Reserved.",
     "footer.backtotop": 'Back to top <span aria-hidden="true">↑</span>',
-
     "modal.eyebrow": "Make a Request",
     "modal.title": "Tell us what you need",
     "modal.lead":
@@ -479,7 +396,6 @@
     "modal.label.email": "Email",
     "modal.label.message": "Request",
     "modal.submit": "Send Request",
-
     "about.breadcrumb": "About Us",
     "about.hero.eyebrow": "Our story",
     "about.hero.title": "PT SENYUM <em>TANI NUSANTARA</em>",
@@ -519,7 +435,6 @@
       "A glimpse of the field process — how every seedling is cared for before becoming export-ready coffee.",
     "about.quote":
       "We believe the strongest coffee partnerships are made with clarity, care, and a shared respect for origin.",
-
     "product.breadcrumb": "Products",
     "product.hero.eyebrow": "Curated green coffee",
     "product.hero.title": "Our <em>Products</em>",
@@ -552,7 +467,6 @@
     "product.note.eyebrow": "Made for your program",
     "product.note.title": "Looking for a tailored coffee profile?",
     "product.note.cta": "Talk to our team",
-
     "contact.breadcrumb": "Contact",
     "contact.hero.eyebrow": "Let's connect",
     "contact.hero.title": "Contact <em>Us</em>",
@@ -569,7 +483,6 @@
     "contact.closing.desc":
       "For lot availability, specifications, or partnership discussions, please email our team.",
     "contact.closing.link": "Send an email",
-
     "index.stats.tons.number":
       '<span class="count-num" data-target="1000">0</span>+ Tons',
     "index.stats.tons.label": "Annual Production",
@@ -578,45 +491,35 @@
     "index.stats.farmers.label": "Years of Experience",
     "index.stats.global.number": "Global",
     "index.stats.global.label": "Market Reach",
-
     "index.map.title":
       "PT Senyum Tani Nusantara Export reaches global trade markets",
-
     "index.partner.eyebrow": "Partnership",
     "index.partner.title": "Our <em>Partner</em>",
     "index.partner.lead":
       "We work with trusted institutions to ensure the best quality and service.",
     "index.partner.cta": "Contact Us",
   };
-
   const originals = new WeakMap();
   window.setaraEnDict = en;
-
   const applyLanguage = (lang) => {
     document.querySelectorAll("[data-i18n]").forEach((el) => {
       const key = el.getAttribute("data-i18n");
       if (!originals.has(el)) originals.set(el, el.innerHTML);
       el.innerHTML = lang === "en" && en[key] ? en[key] : originals.get(el);
     });
-
     document.documentElement.setAttribute("lang", lang);
-
     document.querySelectorAll("[data-lang-option]").forEach((btn) => {
       btn.classList.toggle("is-active", btn.dataset.langOption === lang);
     });
-
     const currentLabel = document.querySelector("[data-lang-current]");
     if (currentLabel) currentLabel.textContent = lang.toUpperCase();
-    
     window.setaraInitCounters?.();
     window.setaraRefreshSliderCaption?.();
   };
-
   const setLanguage = (lang) => {
     localStorage.setItem(STORAGE_KEY, lang);
     applyLanguage(lang);
   };
-
   const buildSwitcher = () => {
     const wrap = document.createElement("div");
     wrap.className = "lang-switcher";
@@ -634,14 +537,12 @@
       </div>
     `;
     document.body.appendChild(wrap);
-
     const toggleBtn = wrap.querySelector(".lang-switcher-toggle");
     toggleBtn.addEventListener("click", (event) => {
       event.stopPropagation();
       const isOpen = wrap.classList.toggle("is-open");
       toggleBtn.setAttribute("aria-expanded", String(isOpen));
     });
-
     wrap.querySelectorAll("[data-lang-option]").forEach((btn) => {
       btn.addEventListener("click", () => {
         setLanguage(btn.dataset.langOption);
@@ -649,52 +550,32 @@
         toggleBtn.setAttribute("aria-expanded", "false");
       });
     });
-
     document.addEventListener("click", (event) => {
       if (!wrap.contains(event.target)) {
         wrap.classList.remove("is-open");
         toggleBtn.setAttribute("aria-expanded", "false");
       }
-
     });
   };
-
-  // ---------------------------------------------------------------------
-  // Cegah tombol "kembali ke atas" & language switcher menumpuk footer.
-  // Kedua tombol itu position:fixed terhadap layar, jadi kalau viewport
-  // pendek (misal mode "desktop site" yang dibuka lewat HP, yang membuat
-  // halaman diperkecil/zoom-out), mereka bisa jatuh tepat di atas footer.
-  // Di sini kita geser ke atas otomatis sebesar area footer yang tumpang
-  // tindih dengan bagian bawah layar.
-  // ---------------------------------------------------------------------
   const SCROLL_TOP_BASE_BOTTOM = 22;
   const LANG_SWITCHER_BASE_BOTTOM = 78;
   const FOOTER_CLEARANCE = 20;
-
   const updateFloatingButtonOffsets = () => {
     const footerBottomRow = document.querySelector(".footer-bottom");
     const scrollTopBtn = document.querySelector(".scroll-top");
     const langSwitcherEl = document.querySelector(".lang-switcher");
     if (!footerBottomRow) return;
-
-    // Acuannya baris "Kembali ke atas" (elemen terakhir di halaman),
-    // bukan seluruh tinggi footer — supaya tombol cuma naik secukupnya
-    // untuk menghindari baris itu, bukan melompat jauh ke atas begitu
-    // footer mulai terlihat.
     const rowTop = footerBottomRow.getBoundingClientRect().top;
     const overlap = Math.max(0, window.innerHeight - rowTop + FOOTER_CLEARANCE);
-
     if (scrollTopBtn)
       scrollTopBtn.style.bottom = `${SCROLL_TOP_BASE_BOTTOM + overlap}px`;
     if (langSwitcherEl)
       langSwitcherEl.style.bottom = `${LANG_SWITCHER_BASE_BOTTOM + overlap}px`;
   };
-
   window.addEventListener("scroll", updateFloatingButtonOffsets, {
     passive: true,
   });
   window.addEventListener("resize", updateFloatingButtonOffsets);
-
   document.addEventListener("DOMContentLoaded", () => {
     buildSwitcher();
     applyLanguage(localStorage.getItem(STORAGE_KEY) || "id");
