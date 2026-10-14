@@ -12,7 +12,10 @@
     <link rel="apple-touch-icon" href="assets/logo-title.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body class="home-page">
@@ -137,21 +140,33 @@
               aria-label="Perjalanan kopi SETARA"
             >
               <div class="slider-track">
-                <div class="slide is-active" data-caption="Dari bibit pilihan" data-caption-key="index.slide1.caption">
+                <div
+                  class="slide is-active"
+                  data-caption="Dari bibit pilihan"
+                  data-caption-key="index.slide1.caption"
+                >
                   <img
                     src="assets/galeri6.webp"
                     alt="Pembibitan kopi SETARA"
                     loading="lazy"
                   />
                 </div>
-                <div class="slide" data-caption="Kebun yang terus tumbuh" data-caption-key="index.slide2.caption">
+                <div
+                  class="slide"
+                  data-caption="Kebun yang terus tumbuh"
+                  data-caption-key="index.slide2.caption"
+                >
                   <img
                     src="assets/galeri4.webp"
                     alt="Kebun kopi SETARA yang subur"
                     loading="lazy"
                   />
                 </div>
-                <div class="slide" data-caption="Dirawat dengan telaten" data-caption-key="index.slide3.caption">
+                <div
+                  class="slide"
+                  data-caption="Dirawat dengan telaten"
+                  data-caption-key="index.slide3.caption"
+                >
                   <img
                     src="assets/coffee-plantation.webp"
                     alt="Tanaman kopi yang dirawat dengan telaten"
@@ -361,10 +376,92 @@
             loading="lazy"
           />
         </a>
-        <p data-i18n="footer.tagline">
-          <strong>Karena Kita Setara.</strong><br />
-          <em>Tumbuh bersama, membawa nilai dari Indonesia untuk dunia.</em>
-        </p>
+
+        <div class="footer-links">
+          <nav class="footer-links-col" aria-label="Semua halaman">
+            <h3 class="footer-links-title" data-i18n="footer.pages.title">
+              Semua Halaman
+            </h3>
+            <ul class="footer-links-list">
+              <li><a href="index.html" data-i18n="nav.beranda">Beranda</a></li>
+              <li>
+                <a href="about.html" data-i18n="nav.about">Tentang Kami</a>
+              </li>
+              <li><a href="product.html" data-i18n="nav.product">Produk</a></li>
+              <li><a href="contact.html" data-i18n="nav.contact">Kontak</a></li>
+            </ul>
+          </nav>
+
+          <nav class="footer-links-col" aria-label="Produk kami">
+            <h3 class="footer-links-title" data-i18n="footer.products.title">
+              Produk Kami
+            </h3>
+            <ul class="footer-links-list">
+              <li><a href="product.html">Robusta Java Dieng</a></li>
+              <li><a href="product.html">Arabica Java Dieng</a></li>
+              <li><a href="product.html">Arabica Java Ijen Natural</a></li>
+              <li><a href="product.html">Arabica Java Ijen Washed</a></li>
+              <li><a href="product.html">Arabica Java Ijen Honey</a></li>
+            </ul>
+          </nav>
+
+          <!-- Kolom Baru: Hubungi Kami (tanpa jam kerja) -->
+          <div
+            class="footer-links-col footer-contact-col"
+            aria-label="Hubungi kami"
+          >
+            <h3 class="footer-links-title" data-i18n="footer.contact.title">
+              Hubungi Kami
+            </h3>
+            <ul class="footer-links-list footer-contact-list">
+              <li>
+                <svg
+                  class="footer-contact-icon"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                  <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+                </svg>
+                <a href="mailto:senyumtaninusantara@gmail.com"
+                  >senyumtaninusantara@gmail.com</a
+                >
+              </li>
+              <li>
+                <svg
+                  class="footer-contact-icon"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+                  ></path>
+                </svg>
+                <a
+                  href="https://wa.me/6282332788984?text=Halo%2C%20saya%20tertarik%20dengan%20produk%20kopi%20Anda!"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >+62 823-3278-8984 (WhatsApp)</a
+                >
+              </li>
+              <li>
+                <svg class="footer-contact-icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                <a
+                  href="https://www.google.com/maps?q=Jl.%20Semeru%20No%2036%2C%20Rambipuji%2C%20Jember%2C%20Jawa%20Timur%2C%20Indonesia"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-i18n="footer.contact.address"
+                >
+                  Jl. Semeru No. 36, Rambipuji, Jember, Jawa Timur
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
         <div class="social-links" aria-label="Media sosial">
           <a
             href="https://www.instagram.com/senyumtaninusantara/"
@@ -406,7 +503,6 @@
       <span aria-hidden="true">↑</span>
     </button>
 
-    
     <div class="request-modal" id="requestModal" aria-hidden="true">
       <div class="request-modal-overlay" data-close-request></div>
       <div

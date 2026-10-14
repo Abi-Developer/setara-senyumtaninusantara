@@ -13,12 +13,14 @@
   detectForcedDesktopMode();
   window.addEventListener("resize", detectForcedDesktopMode);
   window.addEventListener("orientationchange", detectForcedDesktopMode);
+
   const EMAILJS_PUBLIC_KEY = "Xl8zPi10_gdsLxD0X";
   const EMAILJS_SERVICE_ID = "service_wqptp43";
   const EMAILJS_TEMPLATE_ID = "template_itqpzgd";
   if (window.emailjs) {
     window.emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
   }
+
   const body = document.body;
   const loader = document.getElementById("site-loader");
   const menuToggle = document.querySelector(".menu-toggle");
@@ -27,6 +29,7 @@
   const reducedMotion = window.matchMedia(
     "(prefers-reduced-motion: reduce)",
   ).matches;
+
   const closeMenu = () => {
     if (!menuToggle || !primaryNav) return;
     menuToggle.classList.remove("is-open");
@@ -35,6 +38,7 @@
     menuToggle.setAttribute("aria-label", "Buka navigasi");
     body.classList.remove("menu-open");
   };
+
   const openMenu = () => {
     if (!menuToggle || !primaryNav) return;
     menuToggle.classList.add("is-open");
@@ -43,6 +47,7 @@
     menuToggle.setAttribute("aria-label", "Tutup navigasi");
     body.classList.add("menu-open");
   };
+
   if (menuToggle && primaryNav) {
     menuToggle.addEventListener("click", () => {
       primaryNav.classList.contains("is-open") ? closeMenu() : openMenu();
@@ -54,6 +59,7 @@
       if (window.innerWidth > 720) closeMenu();
     });
   }
+
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     anchor.addEventListener("click", (event) => {
       const target = document.querySelector(anchor.getAttribute("href"));
@@ -66,6 +72,7 @@
       closeMenu();
     });
   });
+
   if (scrollTopButton) {
     const toggleScrollTop = () => {
       scrollTopButton.classList.toggle("is-visible", window.scrollY > 500);
@@ -76,6 +83,7 @@
       window.scrollTo({ top: 0, behavior: reducedMotion ? "auto" : "smooth" });
     });
   }
+
   const revealItems = document.querySelectorAll(".reveal");
   if (revealItems.length) {
     document.documentElement.classList.add("reveal-ready");
@@ -95,6 +103,7 @@
       revealItems.forEach((item) => item.classList.add("is-visible"));
     }
   }
+
   if (!reducedMotion) {
     document.querySelectorAll(".button").forEach((button) => {
       button.addEventListener("pointerdown", (event) => {
@@ -114,6 +123,7 @@
       });
     });
   }
+
   const heroImage = document.querySelector("[data-parallax]");
   if (heroImage && !reducedMotion) {
     let frameRequested = false;
@@ -137,6 +147,7 @@
     );
     updateParallax();
   }
+
   const originSlider = document.getElementById("originSlider");
   if (originSlider) {
     const slides = [...originSlider.querySelectorAll(".slide")];
@@ -147,6 +158,7 @@
     const autoplayDelay = Number(originSlider.dataset.autoplay) || 5000;
     let activeIndex = 0;
     let autoplayTimer = null;
+
     const updateActiveCaption = () => {
       if (!captionText) return;
       const activeSlide = slides[activeIndex];
@@ -157,6 +169,7 @@
       captionText.textContent = enText || activeSlide.dataset.caption || "";
     };
     window.setaraRefreshSliderCaption = updateActiveCaption;
+
     const goToSlide = (index) => {
       activeIndex = (index + slides.length) % slides.length;
       slides.forEach((slide, i) =>
@@ -168,6 +181,7 @@
       });
       updateActiveCaption();
     };
+
     const nextSlide = () => goToSlide(activeIndex + 1);
     const prevSlide = () => goToSlide(activeIndex - 1);
     const stopAutoplay = () => {
@@ -178,6 +192,7 @@
       stopAutoplay();
       autoplayTimer = window.setInterval(nextSlide, autoplayDelay);
     };
+
     nextButton?.addEventListener("click", () => {
       nextSlide();
       startAutoplay();
@@ -192,10 +207,12 @@
         startAutoplay();
       }),
     );
+
     originSlider.addEventListener("mouseenter", stopAutoplay);
     originSlider.addEventListener("mouseleave", startAutoplay);
     originSlider.addEventListener("focusin", stopAutoplay);
     originSlider.addEventListener("focusout", startAutoplay);
+
     let touchStartX = 0;
     originSlider.addEventListener("pointerdown", (event) => {
       touchStartX = event.clientX;
@@ -206,9 +223,11 @@
       delta > 0 ? prevSlide() : nextSlide();
       startAutoplay();
     });
+
     goToSlide(0);
     startAutoplay();
   }
+
   const requestModal = document.getElementById("requestModal");
   const requestForm = document.getElementById("requestForm");
   const requestNote = document.getElementById("requestModalNote");
@@ -217,6 +236,7 @@
     "[data-close-request]",
   );
   let lastFocusedBeforeModal = null;
+
   const openRequestModal = () => {
     if (!requestModal) return;
     closeMenu();
@@ -226,6 +246,7 @@
     body.classList.add("menu-open");
     window.setTimeout(() => document.getElementById("reqName")?.focus(), 200);
   };
+
   const closeRequestModal = () => {
     if (!requestModal) return;
     requestModal.classList.remove("is-open");
@@ -233,6 +254,7 @@
     body.classList.remove("menu-open");
     lastFocusedBeforeModal?.focus();
   };
+
   openRequestTriggers.forEach((trigger) => {
     trigger.addEventListener("click", () => {
       openRequestModal();
@@ -245,6 +267,7 @@
     if (event.key === "Escape" && requestModal?.classList.contains("is-open"))
       closeRequestModal();
   });
+
   if (requestForm) {
     requestForm.addEventListener("submit", (event) => {
       event.preventDefault();
@@ -289,6 +312,7 @@
         });
     });
   }
+
   const SETARA_FALLBACK_EMAIL = "senyumtaninusantara@gmail.com";
   function openMailtoFallback({ name, email, message }) {
     const subject = `Permintaan Baru dari ${name}`;
@@ -298,6 +322,7 @@
     )}&body=${encodeURIComponent(body)}`;
     window.location.href = mailtoUrl;
   }
+
   const animateCount = (el) => {
     const target = parseInt(el.dataset.target, 10);
     if (!target || el.dataset.animated) return;
@@ -320,6 +345,7 @@
     };
     window.requestAnimationFrame(tick);
   };
+
   const initCounters = () => {
     const counters = document.querySelectorAll(
       ".count-num:not([data-animated])",
@@ -343,6 +369,7 @@
   };
   initCounters();
   window.setaraInitCounters = initCounters;
+
   window.addEventListener("load", () => {
     window.setTimeout(
       () => loader?.classList.add("is-hidden"),
@@ -351,6 +378,7 @@
   });
   window.setTimeout(() => loader?.classList.add("is-hidden"), 2400);
 })();
+
 /* SETARA — Multi-language switcher (ID default, EN toggle) */
 (() => {
   const STORAGE_KEY = "putri-nusantara-lang";
@@ -385,6 +413,10 @@
     "index.intro.link": "Meet SETARA",
     "footer.tagline":
       "<strong>Because We Are Setara.</strong><br /><em>Growing together, bringing value from Indonesia to the world.</em>",
+    "footer.pages.title": "All Pages",
+    "footer.products.title": "Our Products",
+    "footer.contact.title": "Contact Us",
+    "footer.contact.address": "Jl. Semeru No. 36, Rambipuji, Jember, East Java",
     "footer.copyright":
       "Copyright © 2026 SETARA — PT Senyum Tani Nusantara. All Rights Reserved.",
     "footer.backtotop": 'Back to top <span aria-hidden="true">↑</span>',
@@ -499,8 +531,10 @@
       "We work with trusted institutions to ensure the best quality and service.",
     "index.partner.cta": "Contact Us",
   };
+
   const originals = new WeakMap();
   window.setaraEnDict = en;
+
   const applyLanguage = (lang) => {
     document.querySelectorAll("[data-i18n]").forEach((el) => {
       const key = el.getAttribute("data-i18n");
@@ -516,10 +550,12 @@
     window.setaraInitCounters?.();
     window.setaraRefreshSliderCaption?.();
   };
+
   const setLanguage = (lang) => {
     localStorage.setItem(STORAGE_KEY, lang);
     applyLanguage(lang);
   };
+
   const buildSwitcher = () => {
     const wrap = document.createElement("div");
     wrap.className = "lang-switcher";
@@ -557,9 +593,11 @@
       }
     });
   };
+
   const SCROLL_TOP_BASE_BOTTOM = 22;
   const LANG_SWITCHER_BASE_BOTTOM = 78;
   const FOOTER_CLEARANCE = 20;
+
   const updateFloatingButtonOffsets = () => {
     const footerBottomRow = document.querySelector(".footer-bottom");
     const scrollTopBtn = document.querySelector(".scroll-top");
@@ -572,10 +610,12 @@
     if (langSwitcherEl)
       langSwitcherEl.style.bottom = `${LANG_SWITCHER_BASE_BOTTOM + overlap}px`;
   };
+
   window.addEventListener("scroll", updateFloatingButtonOffsets, {
     passive: true,
   });
   window.addEventListener("resize", updateFloatingButtonOffsets);
+
   document.addEventListener("DOMContentLoaded", () => {
     buildSwitcher();
     applyLanguage(localStorage.getItem(STORAGE_KEY) || "id");
