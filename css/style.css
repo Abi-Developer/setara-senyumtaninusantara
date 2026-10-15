@@ -2898,16 +2898,22 @@ html.forced-desktop-mode .intro-grid {
 }
 
 .footer-brand {
+  display: block;
   grid-area: brand;
-  justify-self: start;
+  width: 100%;
+  min-width: 0;
+  /* file logo punya area transparan lebar di kanan; potong di tepi kolom */
+  overflow: hidden;
 }
 
 .footer-brand img {
+  display: block;
   width: auto;
-  max-width: 100%;
-  height: clamp(96px, 26vw, 150px);
-  object-fit: contain;
-  object-position: left center;
+  max-width: none;
+  /* batalkan batas ukuran logo header (.brand-logo img) */
+  max-height: none;
+  object-fit: fill;
+  height: clamp(110px, 30vw, 150px);
 }
 
 .social-links {
@@ -3079,18 +3085,30 @@ html.forced-desktop-mode .intro-grid {
 /* ≥ 800px: 4 kolom */
 @media (min-width: 800px) {
   .footer-main {
-    grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.95fr) minmax(0, 1.25fr) minmax(0, 1.5fr);
-    grid-template-rows: auto 1fr;
-    grid-template-areas:
-      "brand  pages products contact"
-      "social pages products contact";
+    grid-template-columns:
+      minmax(0, 1.25fr) minmax(0, 0.9fr) minmax(0, 1.15fr) minmax(0, 1.5fr)
+      auto;
+    grid-template-areas: "brand pages products contact social";
     column-gap: clamp(28px, 4vw, 64px);
-    row-gap: 18px;
+    align-items: start;
     padding-block: 56px 92px;
   }
 
   .footer-brand img {
-    height: clamp(110px, 12vw, 175px);
+    height: clamp(130px, 13vw, 230px);
+  }
+
+  /* ikon sosmed di sisi kanan footer (tersusun ke bawah kalau layar sempit) */
+  .social-links {
+    flex-direction: column;
+    align-self: center;
+    justify-self: end;
+  }
+}
+
+@media (min-width: 1200px) {
+  .social-links {
+    flex-direction: row;
   }
 }
 
@@ -3104,18 +3122,23 @@ html.forced-desktop-mode .site-footer {
 }
 
 html.forced-desktop-mode .footer-main {
-  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr) minmax(0, 1.15fr) minmax(0, 1.75fr);
-  grid-template-rows: auto 1fr;
-  grid-template-areas:
-    "brand  pages products contact"
-    "social pages products contact";
-  column-gap: clamp(28px, 4vw, 64px);
-  row-gap: 18px;
+  grid-template-columns:
+    minmax(0, 1.1fr) minmax(0, 0.85fr) minmax(0, 1.1fr) minmax(0, 1.75fr)
+    auto;
+  grid-template-areas: "brand pages products contact social";
+  column-gap: 28px;
+  align-items: start;
   padding-block: 64px 120px;
 }
 
 html.forced-desktop-mode .footer-brand img {
-  height: 175px;
+  height: 150px;
+}
+
+html.forced-desktop-mode .social-links {
+  flex-direction: column;
+  align-self: center;
+  justify-self: end;
 }
 
 html.forced-desktop-mode .social-links {

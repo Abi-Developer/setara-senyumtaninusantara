@@ -389,7 +389,7 @@
     "footer.products.title": "Our Products",
     "footer.contact.title": "Contact Us",
     "footer.copyright":
-      "Copyright © 2026 SETARA — PT Senyum Tani Nusantara. All Rights Reserved.",
+      "Copyright © 2026 SETARA — Senyum Tani Nusantara. All Rights Reserved.",
     "footer.backtotop": 'Back to top <span aria-hidden="true">↑</span>',
     "modal.eyebrow": "Make a Request",
     "modal.title": "Tell us what you need",
