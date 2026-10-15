@@ -2864,8 +2864,8 @@ html.forced-desktop-mode .intro-grid {
   --f-title: 1.1rem;
   --f-link: 0.9rem;
   --f-small: 0.68rem;
-  --f-social: 40px;
-  --f-icon: 18px;
+  --f-social: 44px;
+  --f-icon: 20px;
   background: var(--green-950);
   color: rgba(255, 255, 255, 0.75);
 }
@@ -3138,7 +3138,7 @@ html.forced-desktop-mode .intro-grid {
   .site-footer {
     --f-title: 1.05rem;
     --f-link: 0.85rem;
-    --f-social: 36px;
+    --f-social: 40px;
   }
 
   .footer-main {
@@ -3162,8 +3162,8 @@ html.forced-desktop-mode .site-footer {
   --f-title: 1.2rem;
   --f-link: 0.95rem;
   --f-small: 0.75rem;
-  --f-social: 40px;
-  --f-icon: 18px;
+  --f-social: 48px;
+  --f-icon: 22px;
 }
 
 html.forced-desktop-mode .footer-main {
