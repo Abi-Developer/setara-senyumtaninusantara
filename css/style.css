@@ -3085,7 +3085,8 @@ html.forced-desktop-mode .intro-grid {
   }
 }
 
-/* 800–1099px: 4 kolom (sosmed di bawah logo) */
+/* ≥ 800px (termasuk "Mode Desktop" di HP): 5 kolom horizontal,
+   ikon sosmed selalu di sisi kanan footer */
 @media (min-width: 800px) {
   .site-footer {
     --f-title: clamp(1.15rem, 0.9vw + 0.55rem, 1.4rem);
@@ -3094,37 +3095,35 @@ html.forced-desktop-mode .intro-grid {
 
   .footer-main {
     grid-template-columns:
-      minmax(0, 1.1fr) minmax(0, 0.9fr) minmax(0, 1.15fr) minmax(0, 1.6fr);
-    grid-template-rows: auto 1fr;
-    grid-template-areas:
-      "brand  pages products contact"
-      "social pages products contact";
-    column-gap: clamp(28px, 4vw, 64px);
-    row-gap: 18px;
+      minmax(0, 1fr) minmax(0, 0.8fr) minmax(0, 1.1fr) minmax(0, 1.6fr)
+      auto;
+    grid-template-rows: auto;
+    grid-template-areas: "brand pages products contact social";
+    column-gap: clamp(20px, 3vw, 64px);
+    row-gap: 0;
     align-items: start;
     padding-block: 56px 92px;
   }
 
   .footer-brand {
-    --logo-h: clamp(130px, 13vw, 230px);
+    --logo-h: clamp(125px, 13vw, 230px);
+  }
+
+  /* susun ke bawah dulu supaya hemat tempat; mendatar di layar lebar */
+  .social-links {
+    flex-direction: column;
+    align-self: center;
+    justify-self: end;
   }
 }
 
-/* ≥ 1100px: 5 kolom, ikon sosmed di sisi kanan footer */
+/* ≥ 1100px: kolom lebih lega */
 @media (min-width: 1100px) {
   .footer-main {
     grid-template-columns:
       minmax(0, 1.25fr) minmax(0, 0.9fr) minmax(0, 1.15fr) minmax(0, 1.5fr)
       auto;
-    grid-template-rows: auto;
-    grid-template-areas: "brand pages products contact social";
-    row-gap: 0;
-  }
-
-  .social-links {
-    flex-direction: column;
-    align-self: center;
-    justify-self: end;
+    column-gap: clamp(28px, 4vw, 64px);
   }
 }
 
