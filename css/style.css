@@ -2898,6 +2898,7 @@ html.forced-desktop-mode .intro-grid {
 }
 
 .footer-brand {
+  --logo-h: clamp(110px, 30vw, 150px);
   display: block;
   grid-area: brand;
   width: 100%;
@@ -2913,7 +2914,9 @@ html.forced-desktop-mode .intro-grid {
   /* batalkan batas ukuran logo header (.brand-logo img) */
   max-height: none;
   object-fit: fill;
-  height: clamp(110px, 30vw, 150px);
+  height: var(--logo-h);
+  /* file logo punya ruang transparan di atas & bawah: rapatkan */
+  margin-block: calc(var(--logo-h) * -0.2);
 }
 
 .social-links {
@@ -3082,23 +3085,42 @@ html.forced-desktop-mode .intro-grid {
   }
 }
 
-/* ≥ 800px: 4 kolom */
+/* 800–1099px: 4 kolom (sosmed di bawah logo) */
 @media (min-width: 800px) {
+  .site-footer {
+    --f-title: clamp(1.15rem, 0.9vw + 0.55rem, 1.4rem);
+    --f-link: clamp(0.95rem, 0.3vw + 0.8rem, 1.05rem);
+  }
+
   .footer-main {
     grid-template-columns:
-      minmax(0, 1.25fr) minmax(0, 0.9fr) minmax(0, 1.15fr) minmax(0, 1.5fr)
-      auto;
-    grid-template-areas: "brand pages products contact social";
+      minmax(0, 1.1fr) minmax(0, 0.9fr) minmax(0, 1.15fr) minmax(0, 1.6fr);
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+      "brand  pages products contact"
+      "social pages products contact";
     column-gap: clamp(28px, 4vw, 64px);
+    row-gap: 18px;
     align-items: start;
     padding-block: 56px 92px;
   }
 
-  .footer-brand img {
-    height: clamp(130px, 13vw, 230px);
+  .footer-brand {
+    --logo-h: clamp(130px, 13vw, 230px);
+  }
+}
+
+/* ≥ 1100px: 5 kolom, ikon sosmed di sisi kanan footer */
+@media (min-width: 1100px) {
+  .footer-main {
+    grid-template-columns:
+      minmax(0, 1.25fr) minmax(0, 0.9fr) minmax(0, 1.15fr) minmax(0, 1.5fr)
+      auto;
+    grid-template-rows: auto;
+    grid-template-areas: "brand pages products contact social";
+    row-gap: 0;
   }
 
-  /* ikon sosmed di sisi kanan footer (tersusun ke bawah kalau layar sempit) */
   .social-links {
     flex-direction: column;
     align-self: center;
@@ -3110,6 +3132,30 @@ html.forced-desktop-mode .intro-grid {
   .social-links {
     flex-direction: row;
   }
+}
+
+/* HP sangat kecil (≤359px) */
+@media (max-width: 359px) {
+  .site-footer {
+    --f-title: 1.15rem;
+    --f-link: 0.95rem;
+    --f-social: 40px;
+  }
+
+  .footer-main {
+    gap: 26px;
+    padding-block: 40px 88px;
+  }
+}
+
+/* Notch / area aman (iPhone landscape, dsb.) */
+.site-footer .container {
+  padding-left: max(clamp(18px, 4vw, 50px), env(safe-area-inset-left));
+  padding-right: max(clamp(18px, 4vw, 50px), env(safe-area-inset-right));
+}
+
+.footer-bottom {
+  padding-bottom: calc(18px + env(safe-area-inset-bottom));
 }
 
 /* "Mode Desktop" di HP: layout tetap horizontal, teks dibesarkan */
@@ -3125,14 +3171,15 @@ html.forced-desktop-mode .footer-main {
   grid-template-columns:
     minmax(0, 1.1fr) minmax(0, 0.85fr) minmax(0, 1.1fr) minmax(0, 1.75fr)
     auto;
+  grid-template-rows: auto;
   grid-template-areas: "brand pages products contact social";
   column-gap: 28px;
   align-items: start;
   padding-block: 64px 120px;
 }
 
-html.forced-desktop-mode .footer-brand img {
-  height: 150px;
+html.forced-desktop-mode .footer-brand {
+  --logo-h: 150px;
 }
 
 html.forced-desktop-mode .social-links {
