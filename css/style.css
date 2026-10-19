@@ -3148,7 +3148,7 @@ html.forced-desktop-mode .intro-grid {
 }
 
 /* =========================================================
-   FULL LEFT-ALIGNED MOBILE & DESKTOP FOOTER CSS
+   PADDED LEFT-ALIGNED MOBILE & DESKTOP FOOTER CSS
    ========================================================= */
 
 .site-footer {
@@ -3157,16 +3157,17 @@ html.forced-desktop-mode .intro-grid {
   background: var(--green-950);
 }
 
-/* --- TAMPILAN HP / MOBILE (Rata Kiri Penuh) --- */
+/* --- TAMPILAN HP / MOBILE (Rata kiri dengan jeda jarak yang nyaman) --- */
 .site-footer .container {
   width: 100%;
-  padding-inline: 24px;
+  /* Memberikan ruang jeda di sisi kiri dan kanan agar tidak terlalu mentok */
+  padding-inline: 36px; 
 }
 
 .site-footer .footer-main {
   display: flex;
   flex-direction: column;
-  align-items: flex-start; /* Mengatur seluruh isi footer rata kiri */
+  align-items: flex-start;
   gap: 32px;
   padding: 40px 0 32px;
   text-align: left;
@@ -3231,7 +3232,6 @@ html.forced-desktop-mode .intro-grid {
   color: var(--gold-light);
 }
 
-/* Baris kontak dipastikan rata kiri sepenuhnya dengan jarak aman dari tepi kiri */
 .site-footer .footer-contact-list li {
   display: flex;
   align-items: flex-start;
@@ -3267,7 +3267,7 @@ html.forced-desktop-mode .intro-grid {
 
 .site-footer .social-links {
   display: flex;
-  justify-content: flex-start; /* Ikon sosial media rata kiri */
+  justify-content: flex-start;
   gap: 12px;
   margin: 0;
 }
@@ -3302,7 +3302,6 @@ html.forced-desktop-mode .intro-grid {
     object-position: left center !important;
   }
 
-  /* Di Desktop: Berjejer menyamping 3 kolom */
   .site-footer .footer-links {
     display: flex !important;
     flex-direction: row !important;
