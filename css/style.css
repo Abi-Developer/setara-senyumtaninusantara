@@ -3148,7 +3148,7 @@ html.forced-desktop-mode .intro-grid {
 }
 
 /* =========================================================
-   FINAL CLEAN FOOTER CSS — Pasti Rapi di HP & Desktop
+   CLEAN LEFT-ALIGNED FOOTER CSS
    ========================================================= */
 
 .site-footer {
@@ -3157,51 +3157,51 @@ html.forced-desktop-mode .intro-grid {
   background: var(--green-950);
 }
 
-/* --- ATURAN UMUM (Ponsel & Default) --- */
+/* --- TAMPILAN HP / MOBILE (Rata Kiri) --- */
 .site-footer .container {
   width: 100%;
-  padding-inline: 20px;
+  padding-inline: 24px;
 }
 
 .site-footer .footer-main {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start; /* Mengatur keseluruhan isi footer rata kiri */
   gap: 28px;
   padding: 36px 0 28px;
-  text-align: center;
+  text-align: left;
 }
 
 .site-footer .footer-brand img {
-  height: 140px;
+  height: 130px;
   width: auto;
   max-height: none;
   object-fit: contain;
+  object-position: left center;
 }
 
-/* Di HP: Kolom disusun bertumpuk rapi ke bawah (tidak saling tumpuk) */
 .site-footer .footer-links {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 28px;
+  align-items: flex-start;
+  gap: 24px;
   width: 100%;
   margin: 0;
 }
 
 .site-footer .footer-links-col {
   width: 100%;
-  max-width: 320px;
-  text-align: center;
+  text-align: left;
 }
 
 .site-footer .footer-links-title {
   margin: 0 0 10px;
   color: var(--gold-light);
   font-family: var(--footer-title-font);
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   font-weight: 600;
   line-height: 1.3;
+  text-align: left;
 }
 
 .site-footer .footer-links-list {
@@ -3210,6 +3210,7 @@ html.forced-desktop-mode .intro-grid {
   margin: 0;
   padding: 0;
   list-style: none;
+  text-align: left;
 }
 
 .site-footer .footer-links-list a,
@@ -3217,8 +3218,9 @@ html.forced-desktop-mode .intro-grid {
   color: rgba(255, 255, 255, 0.82);
   font-family: var(--footer-text-font);
   font-weight: 400;
-  font-size: 0.85rem;
+  font-size: 0.84rem;
   line-height: 1.5;
+  text-align: left;
 }
 
 .site-footer .footer-links-list a:hover {
@@ -3228,8 +3230,8 @@ html.forced-desktop-mode .intro-grid {
 .site-footer .footer-contact-list li {
   display: flex;
   align-items: flex-start;
-  justify-content: center;
-  gap: 8px;
+  justify-content: flex-start; /* Ikon dan teks rapat di kiri */
+  gap: 10px;
   text-align: left;
 }
 
@@ -3251,14 +3253,14 @@ html.forced-desktop-mode .intro-grid {
 
 .site-footer .social-links {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start; /* Ikon sosmed rata kiri */
   gap: 12px;
   margin: 0;
 }
 
 .site-footer .social-links a {
-  width: 42px;
-  height: 42px;
+  width: 40px;
+  height: 40px;
   display: grid;
   place-items: center;
 }
@@ -3286,7 +3288,7 @@ html.forced-desktop-mode .intro-grid {
     object-position: left center !important;
   }
 
-  /* Di Desktop: 3 kolom berjejer menyamping ke samping */
+  /* Di Desktop: Berjejer menyamping 3 kolom */
   .site-footer .footer-links {
     display: flex !important;
     flex-direction: row !important;
@@ -3318,5 +3320,6 @@ html.forced-desktop-mode .intro-grid {
   .site-footer .social-links {
     justify-self: end !important;
     margin-right: 58px !important;
+    justify-content: flex-start !important;
   }
 }
