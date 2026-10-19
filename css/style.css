@@ -3148,7 +3148,7 @@ html.forced-desktop-mode .intro-grid {
 }
 
 /* =========================================================
-   FINAL PERFECT ALIGNED FOOTER CSS (Mobile & Desktop)
+   ULTIMATE MOBILE-FRIENDLY ALIGNED FOOTER CSS
    ========================================================= */
 
 .site-footer {
@@ -3157,7 +3157,7 @@ html.forced-desktop-mode .intro-grid {
   background: var(--green-950);
 }
 
-/* --- TAMPILAN HP / MOBILE (Terpusat dengan jarak kiri yang pas) --- */
+/* --- TAMPILAN HP / MOBILE (Terpusat & Rapi dengan Jarak Kiri) --- */
 .site-footer .container {
   width: 100%;
   padding-inline: 20px;
@@ -3166,18 +3166,19 @@ html.forced-desktop-mode .intro-grid {
 .site-footer .footer-main {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Menengahkan seluruh kontainer footer di HP */
+  align-items: center; /* Menengahkan seluruh kontainer utama */
   gap: 28px;
   padding: 36px 0 28px;
   text-align: left;
 }
 
-/* Mengunci lebar maksimal dan menengahkan semua isi footer di HP */
+/* Membatasi lebar seluruh elemen footer (Logo, Menu, Produk, Kontak, Sosmed) di HP */
 .site-footer .footer-brand,
 .site-footer .footer-links,
-.site-footer .social-links {
+.site-footer .social-links,
+.site-footer .footer-links-col {
   width: 100%;
-  max-width: 320px; /* Lebar area konten footer di HP */
+  max-width: 310px; /* Lebar area konten di HP */
   margin-inline: auto;
   text-align: left;
 }
@@ -3194,11 +3195,6 @@ html.forced-desktop-mode .intro-grid {
   display: flex;
   flex-direction: column;
   gap: 24px;
-}
-
-.site-footer .footer-links-col {
-  width: 100%;
-  text-align: left;
 }
 
 .site-footer .footer-links-title {
@@ -3221,7 +3217,8 @@ html.forced-desktop-mode .intro-grid {
 }
 
 .site-footer .footer-links-list a,
-.site-footer .footer-contact-list li {
+.site-footer .footer-contact-list li,
+.site-footer .footer-links-col li {
   color: rgba(255, 255, 255, 0.82);
   font-family: var(--footer-text-font);
   font-weight: 400;
@@ -3234,8 +3231,9 @@ html.forced-desktop-mode .intro-grid {
   color: var(--gold-light);
 }
 
-/* Memastikan baris Hubungi Kami (ikon + teks) rata kiri tapi punya jarak dari tepi HP */
-.site-footer .footer-contact-list li {
+/* Memaksa seluruh item di Hubungi Kami (termasuk teks dan ikon) rata kiri sejajar dengan menu di atasnya */
+.site-footer .footer-contact-list li,
+.site-footer .footer-links-col li {
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
@@ -3243,7 +3241,8 @@ html.forced-desktop-mode .intro-grid {
   text-align: left;
 }
 
-.site-footer .footer-contact-list a {
+.site-footer .footer-contact-list a,
+.site-footer .footer-links-col a {
   overflow-wrap: anywhere;
   text-align: left;
 }
@@ -3293,9 +3292,11 @@ html.forced-desktop-mode .intro-grid {
 
   .site-footer .footer-brand,
   .site-footer .footer-links,
-  .site-footer .social-links {
+  .site-footer .social-links,
+  .site-footer .footer-links-col {
     max-width: none !important;
     margin-inline: 0 !important;
+    width: auto !important;
   }
 
   .site-footer .footer-brand img {
@@ -3303,7 +3304,7 @@ html.forced-desktop-mode .intro-grid {
     object-position: left center !important;
   }
 
-  /* Di Desktop: Berjejer menyamping 3 kolom dengan rapi */
+  /* Di Desktop: Berjejer menyamping 3 kolom secara sempurna */
   .site-footer .footer-links {
     display: flex !important;
     flex-direction: row !important;
@@ -3311,11 +3312,6 @@ html.forced-desktop-mode .intro-grid {
     align-items: flex-start !important;
     justify-content: center !important;
     gap: clamp(24px, 4vw, 64px) !important;
-  }
-
-  .site-footer .footer-links-col {
-    width: auto !important;
-    text-align: left !important;
   }
 
   .site-footer .footer-links-col:not(.footer-contact-col) .footer-links-title,
@@ -3327,7 +3323,8 @@ html.forced-desktop-mode .intro-grid {
     max-width: 250px !important;
   }
 
-  .site-footer .footer-contact-list li {
+  .site-footer .footer-contact-list li,
+  .site-footer .footer-links-col li {
     justify-content: flex-start !important;
     text-align: left !important;
   }
