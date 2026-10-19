@@ -3148,7 +3148,7 @@ html.forced-desktop-mode .intro-grid {
 }
 
 /* =========================================================
-   PERFECT VERTICAL ALIGNED FOOTER CSS (Sejajar Sempurna Rata Atas)
+   POLISHED RESPONSIVE FOOTER CSS (Fixed Desktop Contact Width)
    ========================================================= */
 
 .site-footer {
@@ -3187,7 +3187,7 @@ html.forced-desktop-mode .intro-grid {
   align-items: flex-start;
   gap: 28px;
   width: 100%;
-  padding-left: 16px;
+  padding-left: 16px; /* Jeda jarak aman dari sisi kiri HP */
 }
 
 .site-footer .footer-links-col,
@@ -3292,8 +3292,7 @@ html.forced-desktop-mode .intro-grid {
   .site-footer .footer-main {
     display: grid !important;
     grid-template-columns: auto 1fr auto !important;
-    /* KUNCI UTAMA: Menjaga semua elemen rata atas agar sejajar sempurna tanpa space kosong */
-    align-items: flex-start !important; 
+    align-items: center !important;
     gap: clamp(24px, 3vw, 48px) !important;
     padding: 40px 0 !important;
     text-align: left !important;
@@ -3310,34 +3309,36 @@ html.forced-desktop-mode .intro-grid {
     padding-left: 0 !important;
   }
 
-  /* Di Desktop: Berjejer menyamping dengan tinggi dan posisi yang seragam */
+  /* Di Desktop: Berjejer menyamping 3 kolom */
   .site-footer .footer-links {
     display: flex !important;
     flex-direction: row !important;
     flex-wrap: nowrap !important;
     align-items: flex-start !important;
     justify-content: center !important;
-    gap: clamp(24px, 3.5vw, 48px) !important;
+    gap: clamp(24px, 3.5vw, 54px) !important;
   }
 
   .site-footer .footer-links-col,
   .site-footer .footer-contact {
-    flex: 1 1 0px !important;
     width: auto !important;
-    max-width: 260px !important;
-    min-width: 220px !important;
+    max-width: none !important;
     text-align: left !important;
   }
 
-  .site-footer .footer-links-title {
-    font-size: clamp(0.95rem, 1.1vw, 1.08rem) !important;
+  .site-footer .footer-links-col .footer-links-title,
+  .site-footer .footer-links-col .footer-links-list a {
     white-space: nowrap !important;
-    margin-top: 0 !important; /* Menghilangkan celah space atas judul */
   }
 
-  .site-footer .footer-links-list a,
-  .site-footer .footer-contact-list a {
-    font-size: clamp(0.78rem, 0.9vw, 0.84rem) !important;
+  .site-footer .footer-links-col:not(.footer-contact) {
+    max-width: none !important;
+  }
+
+  /* KUNCI UTAMA: Membatasi lebar kolom "Hubungi Kami" di desktop agar tidak terlalu melebar ke kanan */
+  .site-footer .footer-contact {
+    max-width: 280px !important; 
+    min-width: 250px !important;
   }
 
   .site-footer .footer-contact-list li {
@@ -3346,6 +3347,7 @@ html.forced-desktop-mode .intro-grid {
     justify-content: flex-start !important;
   }
 
+  /* Membuat email dan alamat otomatis mematahkan kata jika terlalu panjang, tanpa terpotong */
   .site-footer .footer-contact-list a {
     word-break: break-word !important;
     overflow-wrap: break-word !important;
@@ -3355,6 +3357,5 @@ html.forced-desktop-mode .intro-grid {
     justify-self: end !important;
     margin-right: 58px !important;
     justify-content: flex-start !important;
-    align-self: flex-start !important; /* Sosial media ikut rata atas sejajar dengan judul */
   }
 }
