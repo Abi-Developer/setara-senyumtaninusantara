@@ -3148,7 +3148,7 @@ html.forced-desktop-mode .intro-grid {
 }
 
 /* =========================================================
-   UNIFIED EQUAL-WIDTH FOOTER CSS (Semua Kolom Sama Ukuran)
+   PERFECT VERTICAL ALIGNED FOOTER CSS (Sejajar Sempurna Rata Atas)
    ========================================================= */
 
 .site-footer {
@@ -3292,7 +3292,8 @@ html.forced-desktop-mode .intro-grid {
   .site-footer .footer-main {
     display: grid !important;
     grid-template-columns: auto 1fr auto !important;
-    align-items: center !important;
+    /* KUNCI UTAMA: Menjaga semua elemen rata atas agar sejajar sempurna tanpa space kosong */
+    align-items: flex-start !important; 
     gap: clamp(24px, 3vw, 48px) !important;
     padding: 40px 0 !important;
     text-align: left !important;
@@ -3309,7 +3310,7 @@ html.forced-desktop-mode .intro-grid {
     padding-left: 0 !important;
   }
 
-  /* Di Desktop: Berjejer menyamping, menyamakan ukuran dan perilaku antar kolom */
+  /* Di Desktop: Berjejer menyamping dengan tinggi dan posisi yang seragam */
   .site-footer .footer-links {
     display: flex !important;
     flex-direction: row !important;
@@ -3319,7 +3320,6 @@ html.forced-desktop-mode .intro-grid {
     gap: clamp(24px, 3.5vw, 48px) !important;
   }
 
-  /* Menyamakan lebar dan struktur seluruh kolom (Semua Halaman, Produk Kami, & Hubungi Kami) */
   .site-footer .footer-links-col,
   .site-footer .footer-contact {
     flex: 1 1 0px !important;
@@ -3332,6 +3332,7 @@ html.forced-desktop-mode .intro-grid {
   .site-footer .footer-links-title {
     font-size: clamp(0.95rem, 1.1vw, 1.08rem) !important;
     white-space: nowrap !important;
+    margin-top: 0 !important; /* Menghilangkan celah space atas judul */
   }
 
   .site-footer .footer-links-list a,
@@ -3354,5 +3355,6 @@ html.forced-desktop-mode .intro-grid {
     justify-self: end !important;
     margin-right: 58px !important;
     justify-content: flex-start !important;
+    align-self: flex-start !important; /* Sosial media ikut rata atas sejajar dengan judul */
   }
 }
