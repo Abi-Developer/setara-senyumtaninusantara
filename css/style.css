@@ -3148,7 +3148,7 @@ html.forced-desktop-mode .intro-grid {
 }
 
 /* =========================================================
-   ULTIMATE MOBILE-FRIENDLY ALIGNED FOOTER CSS
+   PERFECT CENTERED MOBILE & DESKTOP FOOTER CSS
    ========================================================= */
 
 .site-footer {
@@ -3157,117 +3157,124 @@ html.forced-desktop-mode .intro-grid {
   background: var(--green-950);
 }
 
-/* --- TAMPILAN HP / MOBILE (Terpusat & Rapi dengan Jarak Kiri) --- */
+/* --- TAMPILAN HP / MOBILE (Rapi di Tengah, Jarak Kanan-Kiri Aman) --- */
 .site-footer .container {
   width: 100%;
-  padding-inline: 20px;
+  padding-inline: 24px;
 }
 
 .site-footer .footer-main {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Menengahkan seluruh kontainer utama */
-  gap: 28px;
-  padding: 36px 0 28px;
-  text-align: left;
-}
-
-/* Membatasi lebar seluruh elemen footer (Logo, Menu, Produk, Kontak, Sosmed) di HP */
-.site-footer .footer-brand,
-.site-footer .footer-links,
-.site-footer .social-links,
-.site-footer .footer-links-col {
-  width: 100%;
-  max-width: 310px; /* Lebar area konten di HP */
-  margin-inline: auto;
-  text-align: left;
+  align-items: center; /* Menyeluruh di tengah layar */
+  gap: 32px;
+  padding: 40px 0 32px;
+  text-align: center;
 }
 
 .site-footer .footer-brand img {
-  height: 130px;
+  height: 140px;
   width: auto;
   max-height: none;
   object-fit: contain;
-  object-position: left center;
 }
 
 .site-footer .footer-links {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  align-items: center;
+  gap: 28px;
+  width: 100%;
+}
+
+.site-footer .footer-links-col,
+.site-footer .footer-contact {
+  width: 100%;
+  max-width: 340px; /* Lebar maksimal area teks agar tidak terlalu melebar ke pinggir */
+  text-align: center;
 }
 
 .site-footer .footer-links-title {
-  margin: 0 0 10px;
+  margin: 0 0 12px;
   color: var(--gold-light);
   font-family: var(--footer-title-font);
-  font-size: 1.05rem;
+  font-size: 1.1rem;
   font-weight: 600;
   line-height: 1.3;
-  text-align: left;
+  text-align: center;
 }
 
-.site-footer .footer-links-list {
+.site-footer .footer-links-list,
+.site-footer .footer-contact-list {
   display: grid;
-  gap: 8px;
+  gap: 10px;
   margin: 0;
   padding: 0;
   list-style: none;
-  text-align: left;
+  text-align: center;
 }
 
 .site-footer .footer-links-list a,
-.site-footer .footer-contact-list li,
-.site-footer .footer-links-col li {
+.site-footer .footer-contact-list a {
   color: rgba(255, 255, 255, 0.82);
   font-family: var(--footer-text-font);
   font-weight: 400;
-  font-size: 0.84rem;
+  font-size: 0.85rem;
   line-height: 1.5;
-  text-align: left;
+  transition: color 0.25s ease;
 }
 
-.site-footer .footer-links-list a:hover {
+.site-footer .footer-links-list a:hover,
+.site-footer .footer-contact-list a:hover {
   color: var(--gold-light);
 }
 
-/* Memaksa seluruh item di Hubungi Kami (termasuk teks dan ikon) rata kiri sejajar dengan menu di atasnya */
-.site-footer .footer-contact-list li,
-.site-footer .footer-links-col li {
+/* Mengatur baris kontak (ikon di kiri teks, tapi bloknya tetap di tengah) */
+.site-footer .footer-contact-list li {
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
   gap: 10px;
   text-align: left;
+  width: 100%;
+  max-width: 320px;
+  margin-inline: auto; /* Blok kontak persis di tengah layar HP dengan teks rata kiri yang rapi */
 }
 
-.site-footer .footer-contact-list a,
-.site-footer .footer-links-col a {
+.site-footer .footer-contact-list a {
   overflow-wrap: anywhere;
   text-align: left;
 }
 
-.site-footer .footer-contact-icon {
-  width: 15px;
-  height: 15px;
+.site-footer .fc-icon {
+  display: grid;
+  width: 18px;
+  height: 18px;
   flex-shrink: 0;
-  margin-top: 3px;
+  margin-top: 2px;
+  color: var(--gold-light);
+}
+
+.site-footer .fc-icon svg {
+  width: 100%;
+  height: 100%;
   fill: none;
-  stroke: var(--gold-light);
-  stroke-width: 1.8;
+  stroke: currentColor;
+  stroke-width: 2;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
 
 .site-footer .social-links {
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   gap: 12px;
+  margin: 0;
 }
 
 .site-footer .social-links a {
-  width: 40px;
-  height: 40px;
+  width: 42px;
+  height: 42px;
   display: grid;
   place-items: center;
 }
@@ -3290,21 +3297,12 @@ html.forced-desktop-mode .intro-grid {
     text-align: left !important;
   }
 
-  .site-footer .footer-brand,
-  .site-footer .footer-links,
-  .site-footer .social-links,
-  .site-footer .footer-links-col {
-    max-width: none !important;
-    margin-inline: 0 !important;
-    width: auto !important;
-  }
-
   .site-footer .footer-brand img {
     height: clamp(170px, 18vw, 230px) !important;
     object-position: left center !important;
   }
 
-  /* Di Desktop: Berjejer menyamping 3 kolom secara sempurna */
+  /* Di Desktop: Berjejer menyamping 3 kolom (Logo | Menu & Kontak | Sosmed) */
   .site-footer .footer-links {
     display: flex !important;
     flex-direction: row !important;
@@ -3314,24 +3312,30 @@ html.forced-desktop-mode .intro-grid {
     gap: clamp(24px, 4vw, 64px) !important;
   }
 
-  .site-footer .footer-links-col:not(.footer-contact-col) .footer-links-title,
-  .site-footer .footer-links-col:not(.footer-contact-col) .footer-links-list a {
+  .site-footer .footer-links-col,
+  .site-footer .footer-contact {
+    width: auto !important;
+    max-width: none !important;
+    text-align: left !important;
+  }
+
+  .site-footer .footer-links-col .footer-links-title,
+  .site-footer .footer-links-col .footer-links-list a {
     white-space: nowrap !important;
   }
 
-  .site-footer .footer-contact-col {
-    max-width: 250px !important;
+  .site-footer .footer-contact {
+    max-width: 260px !important;
   }
 
-  .site-footer .footer-contact-list li,
-  .site-footer .footer-links-col li {
+  .site-footer .footer-contact-list li {
+    max-width: none !important;
+    margin-inline: 0 !important;
     justify-content: flex-start !important;
-    text-align: left !important;
   }
 
   .site-footer .social-links {
     justify-self: end !important;
     margin-right: 58px !important;
-    justify-content: flex-start !important;
   }
 }
