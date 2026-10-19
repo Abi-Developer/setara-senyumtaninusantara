@@ -3148,7 +3148,7 @@ html.forced-desktop-mode .intro-grid {
 }
 
 /* =========================================================
-   PADDED LEFT-ALIGNED MOBILE FOOTER CSS (Dengan Jeda Jarak Kiri)
+   POLISHED RESPONSIVE FOOTER CSS (Fixed Desktop Contact Width)
    ========================================================= */
 
 .site-footer {
@@ -3160,7 +3160,7 @@ html.forced-desktop-mode .intro-grid {
 /* --- TAMPILAN HP / MOBILE --- */
 .site-footer .container {
   width: 100%;
-  padding-inline: 20px;
+  padding-inline: 24px;
 }
 
 .site-footer .footer-main {
@@ -3172,7 +3172,6 @@ html.forced-desktop-mode .intro-grid {
   text-align: left;
 }
 
-/* Logo SETARA dibiarkan di posisi naturalnya */
 .site-footer .footer-brand img {
   height: 140px;
   width: auto;
@@ -3181,7 +3180,6 @@ html.forced-desktop-mode .intro-grid {
   object-position: left center;
 }
 
-/* MEMBERIKAN JARAK JEDA KIRI PADA BAGIAN MENU, PRODUK, & KONTAK */
 .site-footer .footer-links,
 .site-footer .footer-contact {
   display: flex;
@@ -3189,7 +3187,7 @@ html.forced-desktop-mode .intro-grid {
   align-items: flex-start;
   gap: 28px;
   width: 100%;
-  padding-left: 16px; /* <--- Atur angka ini (misal 16px atau 24px) untuk memberi jarak dari kiri */
+  padding-left: 16px; /* Jeda jarak aman dari sisi kiri HP */
 }
 
 .site-footer .footer-links-col,
@@ -3267,13 +3265,12 @@ html.forced-desktop-mode .intro-grid {
   stroke-linejoin: round;
 }
 
-/* Ikon sosial media juga diberi jarak jeda kiri yang sama */
 .site-footer .social-links {
   display: flex;
   justify-content: flex-start;
   gap: 12px;
   margin: 0;
-  padding-left: 16px; 
+  padding-left: 16px;
 }
 
 .site-footer .social-links a {
@@ -3296,7 +3293,7 @@ html.forced-desktop-mode .intro-grid {
     display: grid !important;
     grid-template-columns: auto 1fr auto !important;
     align-items: center !important;
-    gap: 40px !important;
+    gap: clamp(24px, 3vw, 48px) !important;
     padding: 40px 0 !important;
     text-align: left !important;
   }
@@ -3306,21 +3303,20 @@ html.forced-desktop-mode .intro-grid {
     object-position: left center !important;
   }
 
-  /* Menghilangkan padding kiri tambahan khusus di tampilan desktop */
   .site-footer .footer-links,
   .site-footer .footer-contact,
   .site-footer .social-links {
     padding-left: 0 !important;
   }
 
-  /* Di Desktop: Berjejer menyamping 3 kolom secara sempurna */
+  /* Di Desktop: Berjejer menyamping 3 kolom */
   .site-footer .footer-links {
     display: flex !important;
     flex-direction: row !important;
     flex-wrap: nowrap !important;
     align-items: flex-start !important;
     justify-content: center !important;
-    gap: clamp(24px, 4vw, 64px) !important;
+    gap: clamp(24px, 3.5vw, 54px) !important;
   }
 
   .site-footer .footer-links-col,
@@ -3339,14 +3335,22 @@ html.forced-desktop-mode .intro-grid {
     max-width: none !important;
   }
 
+  /* KUNCI UTAMA: Membatasi lebar kolom "Hubungi Kami" di desktop agar tidak terlalu melebar ke kanan */
   .site-footer .footer-contact {
-    max-width: 260px !important;
+    max-width: 280px !important; 
+    min-width: 250px !important;
   }
 
   .site-footer .footer-contact-list li {
     max-width: none !important;
     margin-inline: 0 !important;
     justify-content: flex-start !important;
+  }
+
+  /* Membuat email dan alamat otomatis mematahkan kata jika terlalu panjang, tanpa terpotong */
+  .site-footer .footer-contact-list a {
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
   }
 
   .site-footer .social-links {
