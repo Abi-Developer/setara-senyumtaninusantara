@@ -3148,7 +3148,7 @@ html.forced-desktop-mode .intro-grid {
 }
 
 /* =========================================================
-   PADDED LEFT-ALIGNED MOBILE & DESKTOP FOOTER CSS
+   PADDED LEFT-ALIGNED MOBILE FOOTER CSS (Dengan Jeda Jarak Kiri)
    ========================================================= */
 
 .site-footer {
@@ -3157,11 +3157,10 @@ html.forced-desktop-mode .intro-grid {
   background: var(--green-950);
 }
 
-/* --- TAMPILAN HP / MOBILE (Rata kiri dengan jeda jarak yang nyaman) --- */
+/* --- TAMPILAN HP / MOBILE --- */
 .site-footer .container {
   width: 100%;
-  /* Memberikan ruang jeda di sisi kiri dan kanan agar tidak terlalu mentok */
-  padding-inline: 36px; 
+  padding-inline: 20px;
 }
 
 .site-footer .footer-main {
@@ -3173,6 +3172,7 @@ html.forced-desktop-mode .intro-grid {
   text-align: left;
 }
 
+/* Logo SETARA dibiarkan di posisi naturalnya */
 .site-footer .footer-brand img {
   height: 140px;
   width: auto;
@@ -3181,18 +3181,20 @@ html.forced-desktop-mode .intro-grid {
   object-position: left center;
 }
 
-.site-footer .footer-links {
+/* MEMBERIKAN JARAK JEDA KIRI PADA BAGIAN MENU, PRODUK, & KONTAK */
+.site-footer .footer-links,
+.site-footer .footer-contact {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 28px;
   width: 100%;
+  padding-left: 16px; /* <--- Atur angka ini (misal 16px atau 24px) untuk memberi jarak dari kiri */
 }
 
 .site-footer .footer-links-col,
 .site-footer .footer-contact {
   width: 100%;
-  max-width: 340px;
   text-align: left;
 }
 
@@ -3265,11 +3267,13 @@ html.forced-desktop-mode .intro-grid {
   stroke-linejoin: round;
 }
 
+/* Ikon sosial media juga diberi jarak jeda kiri yang sama */
 .site-footer .social-links {
   display: flex;
   justify-content: flex-start;
   gap: 12px;
   margin: 0;
+  padding-left: 16px; 
 }
 
 .site-footer .social-links a {
@@ -3302,6 +3306,14 @@ html.forced-desktop-mode .intro-grid {
     object-position: left center !important;
   }
 
+  /* Menghilangkan padding kiri tambahan khusus di tampilan desktop */
+  .site-footer .footer-links,
+  .site-footer .footer-contact,
+  .site-footer .social-links {
+    padding-left: 0 !important;
+  }
+
+  /* Di Desktop: Berjejer menyamping 3 kolom secara sempurna */
   .site-footer .footer-links {
     display: flex !important;
     flex-direction: row !important;
@@ -3321,6 +3333,10 @@ html.forced-desktop-mode .intro-grid {
   .site-footer .footer-links-col .footer-links-title,
   .site-footer .footer-links-col .footer-links-list a {
     white-space: nowrap !important;
+  }
+
+  .site-footer .footer-links-col:not(.footer-contact) {
+    max-width: none !important;
   }
 
   .site-footer .footer-contact {
