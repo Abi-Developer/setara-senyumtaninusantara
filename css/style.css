@@ -3178,12 +3178,15 @@ html.forced-desktop-mode .intro-grid {
     text-align: left !important;
   }
 
-  /* Ukuran logo menyesuaikan lebar layar secara otomatis */
+  /* Ukuran logo SETARA diperbesar untuk Desktop & Mode Desktop HP */
   .site-footer .footer-brand img,
   html.forced-desktop-mode .site-footer .footer-brand img {
     width: auto !important;
-    height: clamp(105px, 12vw, 175px) !important;
+    height: clamp(190px, 20vw, 250px) !important;
     max-height: none !important;
+    margin-block: -24px !important; /* Memangkas ruang kosong transparan atas-bawah logo */
+    object-fit: contain !important;
+    object-position: left center !important;
   }
 
   /* 3 Kolom di tengah selalu berjejer ke samping */
@@ -3294,9 +3297,11 @@ html.forced-desktop-mode .intro-grid {
 }
 
 /* 2. Tampilan Mobile / HP Biasa (Lebar di bawah 800px) */
-@media (max-width: 799px) {
-  .site-footer .container {
-    padding-inline: 20px;
+.site-footer .footer-brand img {
+    height: 185px !important;
+    max-height: none !important;
+    width: auto !important;
+    margin-block: -20px !important;
   }
 
   .site-footer .footer-main {
