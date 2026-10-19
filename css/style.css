@@ -3148,7 +3148,7 @@ html.forced-desktop-mode .intro-grid {
 }
 
 /* =========================================================
-   POLISHED RESPONSIVE FOOTER CSS (Fixed Desktop Contact Width)
+   UNIFIED EQUAL-WIDTH FOOTER CSS (Semua Kolom Sama Ukuran)
    ========================================================= */
 
 .site-footer {
@@ -3187,7 +3187,7 @@ html.forced-desktop-mode .intro-grid {
   align-items: flex-start;
   gap: 28px;
   width: 100%;
-  padding-left: 16px; /* Jeda jarak aman dari sisi kiri HP */
+  padding-left: 16px;
 }
 
 .site-footer .footer-links-col,
@@ -3309,36 +3309,34 @@ html.forced-desktop-mode .intro-grid {
     padding-left: 0 !important;
   }
 
-  /* Di Desktop: Berjejer menyamping 3 kolom */
+  /* Di Desktop: Berjejer menyamping, menyamakan ukuran dan perilaku antar kolom */
   .site-footer .footer-links {
     display: flex !important;
     flex-direction: row !important;
     flex-wrap: nowrap !important;
     align-items: flex-start !important;
     justify-content: center !important;
-    gap: clamp(24px, 3.5vw, 54px) !important;
+    gap: clamp(24px, 3.5vw, 48px) !important;
   }
 
+  /* Menyamakan lebar dan struktur seluruh kolom (Semua Halaman, Produk Kami, & Hubungi Kami) */
   .site-footer .footer-links-col,
   .site-footer .footer-contact {
+    flex: 1 1 0px !important;
     width: auto !important;
-    max-width: none !important;
+    max-width: 260px !important;
+    min-width: 220px !important;
     text-align: left !important;
   }
 
-  .site-footer .footer-links-col .footer-links-title,
-  .site-footer .footer-links-col .footer-links-list a {
+  .site-footer .footer-links-title {
+    font-size: clamp(0.95rem, 1.1vw, 1.08rem) !important;
     white-space: nowrap !important;
   }
 
-  .site-footer .footer-links-col:not(.footer-contact) {
-    max-width: none !important;
-  }
-
-  /* KUNCI UTAMA: Membatasi lebar kolom "Hubungi Kami" di desktop agar tidak terlalu melebar ke kanan */
-  .site-footer .footer-contact {
-    max-width: 280px !important; 
-    min-width: 250px !important;
+  .site-footer .footer-links-list a,
+  .site-footer .footer-contact-list a {
+    font-size: clamp(0.78rem, 0.9vw, 0.84rem) !important;
   }
 
   .site-footer .footer-contact-list li {
@@ -3347,7 +3345,6 @@ html.forced-desktop-mode .intro-grid {
     justify-content: flex-start !important;
   }
 
-  /* Membuat email dan alamat otomatis mematahkan kata jika terlalu panjang, tanpa terpotong */
   .site-footer .footer-contact-list a {
     word-break: break-word !important;
     overflow-wrap: break-word !important;
