@@ -3322,27 +3322,42 @@ html.forced-desktop-mode .intro-grid {
     justify-content: flex-start !important;
   }
 }
+
 /* =========================================================
-   FIX FOOTER — kolom "Hubungi Kami" (desktop)
+   FIX FOOTER — desktop, tablet & "Mode Desktop" di HP
    ========================================================= */
 @media (min-width: 900px) {
-  /* Semua kolom rata atas, jadi judulnya sejajar */
+  /* Kolom tengah boleh menyusut, kolom kontak mengikuti isi
+     (dibatasi max-width di bawah) → tidak ada overflow */
   .site-footer .footer-main {
+    grid-template-columns: auto minmax(0, 1fr) minmax(0, auto) !important;
     align-items: start !important;
   }
 
-  /* Logo tetap di tengah vertikal seperti sebelumnya */
+  /* Logo tetap di tengah vertikal */
   .site-footer .footer-brand {
     align-self: center !important;
   }
 
-  /* Kolom kontak mengikuti lebar isi, tidak dipaksa 260px */
+  /* Ikon sosmed: baris sendiri, rata kiri, tidak ikut tergeser */
+  .site-footer .social-links {
+    grid-column: 1 / -1 !important;
+    justify-self: start !important;
+    margin-right: 0 !important;
+  }
+
+  /* Dua kolom link boleh menyempit, tidak dipaksa 220px */
+  .site-footer .footer-links,
+  .site-footer .footer-links-col {
+    min-width: 0 !important;
+  }
+
+  /* Kolom kontak: cukup lebar untuk email, alamat boleh turun baris */
   .site-footer .footer-contact {
-    width: max-content !important;
-    min-width: 260px !important;
-    max-width: none !important;
-    /* Hilangkan jarak 28px antara judul dan daftar kontak,
-       supaya email naik sejajar dengan "Beranda" & "Robusta Java Dieng" */
+    width: auto !important;
+    min-width: 250px !important;
+    max-width: 300px !important;
+    /* judul & daftar kontak rapat, sejajar dengan kolom lain */
     gap: 5px !important;
   }
 
@@ -3350,5 +3365,13 @@ html.forced-desktop-mode .intro-grid {
   .site-footer .footer-contact-list a {
     overflow-wrap: normal !important;
     word-break: normal !important;
+  }
+}
+
+/* Layar sedang (termasuk "Mode Desktop" di HP, lebar ±980px):
+   logo dikecilkan supaya semua kolom muat */
+@media (min-width: 900px) and (max-width: 1199px) {
+  .site-footer .footer-brand img {
+    height: 140px !important;
   }
 }
