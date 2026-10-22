@@ -3369,9 +3369,57 @@ html.forced-desktop-mode .intro-grid {
 }
 
 /* Layar sedang (termasuk "Mode Desktop" di HP, lebar ±980px):
-   logo dikecilkan supaya semua kolom muat */
+   semua dikecilkan supaya muat dan tidak terpotong di pinggir */
 @media (min-width: 900px) and (max-width: 1199px) {
+  .site-footer .container {
+    padding-inline: 22px !important;
+  }
+
+  .site-footer .footer-main {
+    gap: 18px 20px !important;
+    padding: 32px 0 28px !important;
+  }
+
+  /* Semua kolom boleh menyusut, tidak ada yang mendorong lebar halaman */
+  .site-footer .footer-main > * {
+    min-width: 0 !important;
+  }
+
   .site-footer .footer-brand img {
-    height: 140px !important;
+    height: 96px !important;
+    max-width: 100% !important;
+  }
+
+  .site-footer .footer-links {
+    gap: 20px !important;
+  }
+
+  .site-footer .footer-links-title {
+    margin-bottom: 8px !important;
+    font-size: 0.9rem !important;
+  }
+
+  .site-footer .footer-links-list,
+  .site-footer .footer-contact-list {
+    gap: 7px !important;
+  }
+
+  .site-footer .footer-links-list a,
+  .site-footer .footer-contact-list a {
+    font-size: 0.74rem !important;
+  }
+
+  .site-footer .footer-contact {
+    min-width: 0 !important;
+    max-width: 250px !important;
+  }
+
+  .site-footer .footer-contact-list li {
+    gap: 8px !important;
+  }
+
+  .site-footer .social-links a {
+    width: 36px !important;
+    height: 36px !important;
   }
 }
