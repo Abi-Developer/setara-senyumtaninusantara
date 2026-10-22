@@ -2849,87 +2849,55 @@ html.forced-desktop-mode .intro-grid {
   word-break: normal;
 }
 
-
 /* =========================================================
-   FOOTER — satu blok, mobile-first
-   • < 480px   : 1 kolom
-   • 480–799px : 2 kolom (logo, link, kontak)
-   • ≥ 800px   : 4 kolom (logo+sosmed | halaman | produk | kontak)
-   • "Mode Desktop" di HP (html.forced-desktop-mode) selalu 4 kolom
-     dan teksnya dibesarkan supaya terbaca saat halaman diperkecil.
+   FOOTER — Bersih, Sejajar & Responsif (Mobile-First)
    ========================================================= */
 .site-footer {
   --footer-title-font: var(--serif);
   --footer-text-font: var(--sans);
-  --f-title: 1.1rem;
-  --f-link: 0.9rem;
-  --f-small: 0.68rem;
-  --f-social: 44px;
-  --f-icon: 20px;
   background: var(--green-950);
-  color: rgba(255, 255, 255, 0.75);
+  color: rgba(255, 255, 255, 0.78);
 }
 
 .site-footer .container {
   width: 100%;
-  max-width: none;
-  margin-inline: 0;
-  padding-inline: clamp(18px, 4vw, 50px);
+  max-width: 1280px;
+  margin-inline: auto;
+  padding-inline: clamp(20px, 4vw, 50px);
 }
 
-/* Grid utama (HP): 1 kolom */
+/* --- TAMPILAN HP / MOBILE (Default: 1 Kolom) --- */
 .footer-main {
   display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  grid-template-areas:
-    "brand"
-    "social"
-    "pages"
-    "products"
-    "contact";
+  grid-template-columns: 1fr;
   gap: 32px;
-  /* ruang bawah untuk tombol bahasa yang melayang di atas baris copyright */
-  padding-block: 48px 92px;
+  padding-block: 48px 40px;
+  align-items: start;
 }
 
-/* .footer-links dilepas supaya dua kolom di dalamnya ikut grid utama */
+/* Membuka wrapper .footer-links agar dua <nav> di dalamnya
+   langsung menjadi kolom di dalam grid .footer-main */
 .footer-links {
   display: contents;
 }
 
 .footer-brand {
-  --logo-h: clamp(110px, 30vw, 150px);
-  display: block;
-  grid-area: brand;
-  width: 100%;
-  min-width: 0;
-  /* file logo punya area transparan lebar di kanan; potong di tepi kolom */
-  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  width: auto;
+  max-width: 100%;
+  overflow: visible; /* Mencegah logo terpotong */
 }
 
 .footer-brand img {
   display: block;
   width: auto;
-  max-width: none;
-  /* batalkan batas ukuran logo header (.brand-logo img) */
+  height: clamp(95px, 12vw, 135px);
+  max-width: 240px;
   max-height: none;
-  object-fit: fill;
-  height: var(--logo-h);
-  /* file logo punya ruang transparan di atas & bawah: rapatkan */
-  margin-block: calc(var(--logo-h) * -0.2);
+  object-fit: contain;
+  object-position: left center;
 }
-
-.social-links {
-  grid-area: social;
-  align-self: start;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-
-.footer-links-col:nth-child(1) { grid-area: pages; }
-.footer-links-col:nth-child(2) { grid-area: products; }
-.footer-contact { grid-area: contact; }
 
 .footer-links-col,
 .footer-contact {
@@ -2937,34 +2905,30 @@ html.forced-desktop-mode .intro-grid {
 }
 
 .footer-links-title {
-  margin: 0 0 18px;
+  margin: 0 0 16px;
   color: var(--gold-light);
   font-family: var(--footer-title-font);
-  font-size: var(--f-title);
+  font-size: 1.08rem;
   font-weight: 600;
-  letter-spacing: 0;
-  line-height: 1.25;
-  text-transform: none;
+  line-height: 1.3;
 }
 
 .footer-links-list,
 .footer-contact-list {
   display: grid;
-  gap: 12px;
+  gap: 11px;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
 .footer-links-list a,
-.footer-contact-list a,
-.footer-contact-list span:not(.fc-icon) {
+.footer-contact-list a {
   color: rgba(255, 255, 255, 0.82);
   font-family: var(--footer-text-font);
-  font-size: var(--f-link);
-  font-weight: 500;
+  font-size: 0.86rem;
+  font-weight: 400;
   line-height: 1.5;
-  overflow-wrap: break-word;
   transition: color 0.25s ease;
 }
 
@@ -2973,24 +2937,23 @@ html.forced-desktop-mode .intro-grid {
   color: var(--gold-light);
 }
 
-/* Kolom kontak */
-.footer-contact-list a,
-.footer-contact-list span:not(.fc-icon) {
-  overflow-wrap: anywhere;
-}
-
 .footer-contact-list li {
   display: flex;
   align-items: flex-start;
-  gap: 12px;
+  gap: 10px;
+}
+
+.footer-contact-list a {
+  overflow-wrap: break-word;
+  word-break: normal;
 }
 
 .fc-icon {
   display: grid;
-  flex: 0 0 auto;
-  width: var(--f-icon);
-  height: var(--f-icon);
-  margin-top: 0.2em;
+  flex: 0 0 18px;
+  width: 18px;
+  height: 18px;
+  margin-top: 3px;
   place-items: center;
   color: var(--gold-light);
 }
@@ -3002,14 +2965,21 @@ html.forced-desktop-mode .intro-grid {
   stroke: currentColor;
   stroke-linecap: round;
   stroke-linejoin: round;
-  stroke-width: 1.7;
+  stroke-width: 1.8;
 }
 
-/* Sosial media */
+/* Ikon Sosial Media */
+.social-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
 .social-links a {
   display: grid;
-  width: var(--f-social);
-  aspect-ratio: 1;
+  width: 42px;
+  height: 42px;
   place-items: center;
   border: 1px solid rgba(255, 255, 255, 0.28);
   border-radius: 50%;
@@ -3041,79 +3011,75 @@ html.forced-desktop-mode .intro-grid {
   fill: none;
 }
 
-/* Baris copyright */
+/* Baris Copyright Bawah */
 .footer-bottom {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 8px 24px;
-  padding-block: 18px;
+  gap: 12px 24px;
+  padding-block: 20px;
   border-top: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .footer-bottom small {
   color: rgba(255, 255, 255, 0.62);
-  font-size: var(--f-small);
+  font-size: 0.75rem;
   line-height: 1.5;
 }
 
 .footer-bottom a {
   color: var(--gold-light);
-  font-size: var(--f-small);
+  font-size: 0.75rem;
   font-weight: 600;
   white-space: nowrap;
 }
 
-/* Dekat footer, tombol panah mengambang disembunyikan
-   (footer sudah punya "Kembali ke atas") */
 .scroll-top.is-near-footer {
   opacity: 0;
   pointer-events: none;
 }
 
-/* 480–799px: 2 kolom */
-@media (min-width: 480px) {
+/* --- TAMPILAN TABLET (560px – 959px: 2 Kolom) --- */
+@media (min-width: 560px) and (max-width: 959px) {
   .footer-main {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    grid-template-areas:
-      "brand    brand"
-      "social   social"
-      "pages    products"
-      "contact  contact";
-    column-gap: 32px;
-  }
-}
-
-/* ≥ 800px (termasuk "Mode Desktop" di HP): 5 kolom horizontal,
-   ikon sosmed selalu di sisi kanan footer */
-@media (min-width: 800px) {
-  .site-footer {
-    --f-title: clamp(1.05rem, 0.6vw + 0.55rem, 1.25rem);
-    --f-link: clamp(0.85rem, 0.2vw + 0.75rem, 0.95rem);
-  }
-
-  .footer-main {
-    grid-template-columns:
-      minmax(0, 1fr) minmax(0, 0.8fr) minmax(0, 1.1fr) minmax(0, 1.6fr)
-      auto;
-    grid-template-rows: auto;
-    grid-template-areas: "brand pages products contact social";
-    column-gap: clamp(20px, 3vw, 64px);
-    row-gap: 0;
-    align-items: start;
-    padding-block: 56px 92px;
+    gap: 36px 32px;
   }
 
   .footer-brand {
-    --logo-h: clamp(125px, 13vw, 230px);
+    grid-column: 1 / -1;
   }
 
-  /* susun ke bawah dulu supaya hemat tempat; mendatar di layar lebar */
   .social-links {
-    flex-direction: column;
+    grid-column: 1 / -1;
+  }
+}
+
+/* --- TAMPILAN LAPTOP / DESKTOP (≥ 960px: 5 Kolom Sejajar) --- */
+@media (min-width: 960px) {
+  .footer-main {
+    grid-template-columns:
+      minmax(190px, 1.15fr)
+      minmax(140px, 0.85fr)
+      minmax(190px, 1.1fr)
+      minmax(240px, 1.4fr)
+      auto;
+    gap: clamp(24px, 3vw, 48px);
+    align-items: start; /* Membuat semua judul kolom rata atas */
+    padding-block: 64px 56px;
+  }
+
+  /* Menyeimbangkan posisi vertikal logo & ikon sosmed di tengah */
+  .footer-brand,
+  .social-links {
     align-self: center;
+  }
+
+  .social-links {
     justify-self: end;
+    /* Memberi ruang agar tidak tertutup tombol bahasa (ID) di pojok kanan bawah */
+    margin-right: 48px;
   }
 }
 
@@ -3354,5 +3320,35 @@ html.forced-desktop-mode .intro-grid {
     justify-self: end !important;
     margin-right: 58px !important;
     justify-content: flex-start !important;
+  }
+}
+/* =========================================================
+   FIX FOOTER — kolom "Hubungi Kami" (desktop)
+   ========================================================= */
+@media (min-width: 900px) {
+  /* Semua kolom rata atas, jadi judulnya sejajar */
+  .site-footer .footer-main {
+    align-items: start !important;
+  }
+
+  /* Logo tetap di tengah vertikal seperti sebelumnya */
+  .site-footer .footer-brand {
+    align-self: center !important;
+  }
+
+  /* Kolom kontak mengikuti lebar isi, tidak dipaksa 260px */
+  .site-footer .footer-contact {
+    width: max-content !important;
+    min-width: 260px !important;
+    max-width: none !important;
+    /* Hilangkan jarak 28px antara judul dan daftar kontak,
+       supaya email naik sejajar dengan "Beranda" & "Robusta Java Dieng" */
+    gap: 5px !important;
+  }
+
+  /* Email tidak dipatah di tengah kata */
+  .site-footer .footer-contact-list a {
+    overflow-wrap: normal !important;
+    word-break: normal !important;
   }
 }
